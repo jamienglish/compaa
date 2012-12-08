@@ -1,3 +1,7 @@
+Given /^no reference images or difference images$/ do
+  # do nothing
+end
+
 Given /^a sample reference screenshot$/ do
   write_file 'artifacts/reference_screenshots/dir/image.png',
     sample_reference_image

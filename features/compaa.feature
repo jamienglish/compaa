@@ -29,3 +29,10 @@ Feature: Generate Rake Artifacts Tasks
     When I run `compaa` interactively
     And I reject the screenshot
     Then the new reference screenshot should be the same as the original reference screenshot
+
+	Scenario: Generated images without corresponding reference images require approval
+    Given a sample generated screenshot
+		And no reference images or difference images
+    When I run `compaa` interactively
+    And I approve the screenshot
+    Then the new reference screenshot should be the same as the sample generated screenshot
