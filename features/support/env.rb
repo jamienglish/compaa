@@ -1,7 +1,6 @@
 require 'aruba/cucumber'
 require 'methadone/cucumber'
 require 'wrong'
-require 'fileutils'
 
 include Wrong
 
@@ -18,16 +17,4 @@ end
 
 After do
   ENV['RUBYLIB'] = @original_rubylib
-end
-
-RSpec::Matchers.define :be_the_same_file_as do |expected|
-  match do |actual|
-    FileUtils.cmp actual, expected
-  end
-end
-
-RSpec::Matchers.define :exist do
-  match do |path|
-    File.exists? path 
-  end
 end
