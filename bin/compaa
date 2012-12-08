@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'methadone'
+require 'compaa'
+require 'fileutils'
+
+class App
+  include Methadone::Main
+  include Methadone::CLILogging
+
+  main do
+    difference_images.each do |difference_image_path|
+      puts "Comparing: #{difference_image_path}"
+      puts "Would you like to make this the reference image?"
+
+      make_reference_image_from_diff difference_image_path if screenshot_approved?
+    end
+  end
+
+  class << self
+    def screenshot_approved?
+      STDIN.gets.chomp.downcase.start_with? 'y'
+    end
+
+    def difference_images
+      Dir[File.join %w[artifacts differences_in_screenshots_this_run ** *.gif]]
+    end
+
+    def generated_images
+      Dir[File.join %w[artifacts screenshots_generated_this_run ** *.png]]
+    end
+
+    def make_reference_image_from_diff difference_image_path
+      reference_path = difference_image_path.gsub(
+        'differences_in_screenshots_this_run', 'reference_screenshots'
+      ).gsub('_difference.gif', '')
+      generated_path = difference_image_path.gsub(
+        'differences_in_screenshots_this_run', 'screenshots_generated_this_run'
+      ).gsub('_difference.gif', '')
+
+      FileUtils.mkdir_p File.dirname reference_path
+      FileUtils.cp generated_path, reference_path
+      FileUtils.rm difference_image_path
+    end
+
+    def make_reference_image_from_generated_image generated_image
+      reference_path = generated_image.gsub 'screenshots_generated_this_run', 'reference_screenshots'
+      copy_and_create_directory generated_image, reference_path
+    end
+
+    def copy_and_create_directory source, dest
+      create_directory_unless_exists dest
+      FileUtils.cp source, dest
+    end
+
+    def create_directory_unless_exists path
+      FileUtils.mkdir_p File.dirname(path) unless File.exists? File.dirname(path)
+    end
+  end
+
+  # Declare command-line interface here
+
+  # description "one line description of your app"
+  #
+  # Accept flags via:
+  # on("--flag VAL","Some flag")
+  # options[flag] will contain VAL
+  #
+  # Specify switches via:
+  # on("--[no-]switch","Some switch")
+  #
+  # Or, just call OptionParser methods on opts
+  #
+  # Require an argument
+  # arg :some_arg 
+  #
+  # # Make an argument optional
+  # arg :optional_arg, :optional
+
+  version Compaa::VERSION
+
+  use_log_level_option
+
+  go!
+end
