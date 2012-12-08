@@ -26,4 +26,14 @@ describe Compaa::DifferenceImage do
 
 		file_manager.verify
 	end
+
+	it "provides its corresponding reference image path" do
+		path =
+			File.join %w[artifacts differences_in_screenshots_this_run dir file.png_difference.gif]
+
+		reference_path =
+			File.join %w[artifacts reference_screenshots dir file.png]
+
+		Compaa::DifferenceImage.new(path).reference_path.must_equal reference_path
+	end
 end
