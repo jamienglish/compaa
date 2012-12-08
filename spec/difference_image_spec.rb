@@ -5,6 +5,21 @@ require 'minitest/autorun'
 require 'compaa'
 
 describe Compaa::DifferenceImage do
+  describe :all do
+    it "returns an array of all difference images in the artifacts directory" do
+      file_list = [
+        File.join(%w[artifacts differences_in_screenshots_this_run file.png_difference.gif]),
+        File.join(%w[artifacts differences_in_screenshots_this_run dir file.png_difference.gif]),
+        File.join(%w[artifacts differences_in_screenshots_this_run dir file.png_difference_2.gif]),
+        File.join(%w[artifacts differences_in_screenshots_this_run dir sub_dir file.png_difference.gif])
+      ]
+
+      Dir.stub :glob, file_list do
+        Compaa::DifferenceImage.all.map(&:path).must_equal file_list
+      end
+    end
+  end
+
   it "creates a reference image" do
     difference_image_path =
       File.join %w[artifacts differences_in_screenshots_this_run dir file.png_difference.gif]
