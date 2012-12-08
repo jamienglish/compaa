@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module Compaa
   class GeneratedImage < Struct.new(:path)
     attr_writer :file_manager

@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module Compaa
   class DifferenceImage < Struct.new(:path)
     attr_writer :file_manager
