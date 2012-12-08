@@ -26,6 +26,6 @@ Feature: Generate Rake Artifacts Tasks
     Given a sample reference screenshot
     And a sample generated screenshot
     And a sample difference screenshot
-    When I run `rake compaa` interactively
+    When I run `compaa` interactively
     And I reject the screenshot
     Then the new reference screenshot should be the same as the original reference screenshot
