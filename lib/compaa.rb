@@ -1,4 +1,2 @@
-require "compaa/version"
-
-module Compaa
-end
+require 'compaa/version'
+require 'compaa/difference_image'

@@ -10,11 +10,11 @@ class App
   include Methadone::CLILogging
 
   main do
-    difference_images.each do |difference_image_path|
-      puts "Comparing: #{difference_image_path}"
+    difference_images.each do |path|
+      puts "Comparing: #{path}"
       puts "Would you like to make this the reference image?"
 
-      make_reference_image_from_diff difference_image_path if screenshot_approved?
+      Compaa::DifferenceImage.new(path).create_reference_image if screenshot_approved?
     end
   end
 
@@ -29,19 +29,6 @@ class App
 
     def generated_images
       Dir[File.join %w[artifacts screenshots_generated_this_run ** *.png]]
-    end
-
-    def make_reference_image_from_diff difference_image_path
-      reference_path = difference_image_path.gsub(
-        'differences_in_screenshots_this_run', 'reference_screenshots'
-      ).gsub('_difference.gif', '')
-      generated_path = difference_image_path.gsub(
-        'differences_in_screenshots_this_run', 'screenshots_generated_this_run'
-      ).gsub('_difference.gif', '')
-
-      FileUtils.mkdir_p File.dirname reference_path
-      FileUtils.cp generated_path, reference_path
-      FileUtils.rm difference_image_path
     end
 
     def make_reference_image_from_generated_image generated_image
