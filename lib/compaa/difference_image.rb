@@ -1,13 +1,11 @@
-require 'fileutils'
-
 module Compaa
   class DifferenceImage < Struct.new(:path)
     attr_writer :file_manager
 
     def self.all
-      Dir.glob(File.join %w[artifacts differences_in_screenshots_this_run ** *.gif]).map do |path|
+      Dir.glob(File.join %w[artifacts differences_in_screenshots_this_run ** *.gif]).map { |path|
         new path
-      end
+      }
     end
 
     def create_reference_image
