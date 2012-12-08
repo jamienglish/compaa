@@ -3,6 +3,7 @@
 require 'optparse'
 require 'methadone'
 require 'compaa'
+require 'gtk2'
 
 class App
   include Methadone::Main
@@ -20,14 +21,19 @@ class App
       next if generated_image.has_reference_image?
 
       puts "Approving: #{generated_image.path}"
-      puts "Would you like to make this the reference image?"
-
       generated_image.create_reference_image if screenshot_approved?
     end
   end
 
   def self.screenshot_approved?
-    STDIN.gets.chomp.downcase.start_with? 'y'
+    dialog = Gtk::MessageDialog.new(nil, Gtk::Dialog::DESTROY_WITH_PARENT,
+                                    Gtk::MessageDialog::QUESTION,
+                                    Gtk::MessageDialog::BUTTONS_YES_NO,
+                                    "Would you like to make this file the reference shot?")
+    approved = dialog.run == -8
+    dialog.destroy
+
+    approved
   end
 
   version Compaa::VERSION
