@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/jamienglish/compaa.png?branch=master)](https://travis-ci.org/jamienglish/compaa)
+
 # compaa
 
 As a companion to `Symilaa`, `Compaa` compares screenshots and presents the user
