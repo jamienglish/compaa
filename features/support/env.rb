@@ -4,6 +4,8 @@ require 'wrong'
 
 include Wrong
 
+ENV['APP_ENV'] = 'test'
+
 bin_dir     = File.expand_path File.dirname(__FILE__), '../../bin'
 ENV['PATH'] = bin_dir + File::PATH_SEPARATOR + ENV['PATH']
 LIB_DIR     = File.expand_path File.dirname(__FILE__), '../../lib'

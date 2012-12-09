@@ -3,7 +3,7 @@
 require 'optparse'
 require 'methadone'
 require 'compaa'
-require 'gtk2'
+require 'gtk2' unless ENV['APP_ENV'] == 'test'
 
 class App
   include Methadone::Main
@@ -26,14 +26,18 @@ class App
   end
 
   def self.screenshot_approved?
-    dialog = Gtk::MessageDialog.new(nil, Gtk::Dialog::DESTROY_WITH_PARENT,
-                                    Gtk::MessageDialog::QUESTION,
-                                    Gtk::MessageDialog::BUTTONS_YES_NO,
-                                    "Would you like to make this file the reference shot?")
-    approved = dialog.run == -8
-    dialog.destroy
+    if ENV['APP_ENV'] == 'test'
+      STDIN.gets.chomp.downcase.start_with? 'y'
+    else
+      dialog = Gtk::MessageDialog.new(nil, Gtk::Dialog::DESTROY_WITH_PARENT,
+                                      Gtk::MessageDialog::QUESTION,
+                                      Gtk::MessageDialog::BUTTONS_YES_NO,
+                                      "Would you like to make this file the reference shot?")
+      approved = dialog.run == -8
+      dialog.destroy
 
-    approved
+      approved
+    end
   end
 
   version Compaa::VERSION
