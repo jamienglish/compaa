@@ -11,7 +11,7 @@ module Compaa
     end
 
     def create_reference_image
-      copy_and_create_directory path, reference_path
+      copy_and_create_directory reference_path
     end
 
     def has_reference_image?
@@ -24,9 +24,9 @@ module Compaa
 
     private
 
-    def copy_and_create_directory source, dest
+    def copy_and_create_directory dest
       file_manager.mkdir_p File.dirname dest
-      file_manager.cp source, dest
+      file_manager.cp path, dest
     end
 
     def file_manager
