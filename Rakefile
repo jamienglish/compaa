@@ -7,7 +7,7 @@ require 'cucumber/rake/task'
 Bundler::GemHelper.install_tasks
 
 Rake::TestTask.new :spec do |t|
-  t.libs << 'spec'
+  t.libs   << 'spec'
   t.pattern = 'spec/**/*_spec.rb'
 end
 
