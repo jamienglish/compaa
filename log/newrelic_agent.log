@@ -1,0 +1,201 @@
+# Logfile created on 2012-12-14 10:32:32 +0000 by logger.rb/31641
+[12/14/12 10:32:32 +0000 ubuntu (4893)] INFO : Dispatcher: thin
+[12/14/12 10:32:32 +0000 ubuntu (4893)] INFO : Application: development
+[12/14/12 10:32:32 +0000 ubuntu (4893)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 10:32:32 +0000 ubuntu (4893)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 4893
+[12/14/12 10:32:32 +0000 ubuntu (4893)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 10:33:39 +0000 ubuntu (4982)] INFO : Dispatcher: thin
+[12/14/12 10:33:39 +0000 ubuntu (4982)] INFO : Application: development
+[12/14/12 10:33:39 +0000 ubuntu (4982)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 10:33:39 +0000 ubuntu (4982)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 4982
+[12/14/12 10:33:39 +0000 ubuntu (4982)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 10:35:01 +0000 ubuntu (5070)] INFO : Dispatcher: thin
+[12/14/12 10:35:01 +0000 ubuntu (5070)] INFO : Application: development
+[12/14/12 10:35:01 +0000 ubuntu (5070)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 10:35:01 +0000 ubuntu (5070)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 5070
+[12/14/12 10:35:01 +0000 ubuntu (5070)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 10:56:42 +0000 ubuntu (5338)] INFO : Dispatcher: thin
+[12/14/12 10:56:42 +0000 ubuntu (5338)] INFO : Application: development
+[12/14/12 10:56:42 +0000 ubuntu (5338)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 10:56:42 +0000 ubuntu (5338)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 5338
+[12/14/12 10:56:42 +0000 ubuntu (5338)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 10:57:27 +0000 ubuntu (5434)] INFO : Dispatcher: thin
+[12/14/12 10:57:27 +0000 ubuntu (5434)] INFO : Application: development
+[12/14/12 10:57:27 +0000 ubuntu (5434)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 10:57:27 +0000 ubuntu (5434)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 5434
+[12/14/12 10:57:27 +0000 ubuntu (5434)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 11:41:30 +0000 ubuntu (5993)] INFO : Dispatcher: thin
+[12/14/12 11:41:30 +0000 ubuntu (5993)] INFO : Application: development
+[12/14/12 11:41:30 +0000 ubuntu (5993)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 11:41:30 +0000 ubuntu (5993)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 5993
+[12/14/12 11:41:30 +0000 ubuntu (5993)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 11:44:00 +0000 ubuntu (6111)] INFO : Dispatcher: thin
+[12/14/12 11:44:00 +0000 ubuntu (6111)] INFO : Application: development
+[12/14/12 11:44:00 +0000 ubuntu (6111)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 11:44:00 +0000 ubuntu (6111)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 6111
+[12/14/12 11:44:00 +0000 ubuntu (6111)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 11:45:14 +0000 ubuntu (6429)] INFO : Dispatcher: thin
+[12/14/12 11:45:14 +0000 ubuntu (6429)] INFO : Application: development
+[12/14/12 11:45:14 +0000 ubuntu (6429)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 11:45:14 +0000 ubuntu (6429)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 6429
+[12/14/12 11:45:14 +0000 ubuntu (6429)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 11:52:10 +0000 ubuntu (6569)] INFO : Dispatcher: thin
+[12/14/12 11:52:10 +0000 ubuntu (6569)] INFO : Application: development
+[12/14/12 11:52:10 +0000 ubuntu (6569)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 11:52:10 +0000 ubuntu (6569)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 6569
+[12/14/12 11:52:10 +0000 ubuntu (6569)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 11:56:06 +0000 ubuntu (6672)] INFO : Dispatcher: thin
+[12/14/12 11:56:06 +0000 ubuntu (6672)] INFO : Application: development
+[12/14/12 11:56:06 +0000 ubuntu (6672)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 11:56:06 +0000 ubuntu (6672)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 6672
+[12/14/12 11:56:06 +0000 ubuntu (6672)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 11:56:33 +0000 ubuntu (6772)] INFO : Dispatcher: thin
+[12/14/12 11:56:33 +0000 ubuntu (6772)] INFO : Application: development
+[12/14/12 11:56:33 +0000 ubuntu (6772)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 11:56:33 +0000 ubuntu (6772)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 6772
+[12/14/12 11:56:33 +0000 ubuntu (6772)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 11:57:24 +0000 ubuntu (6870)] INFO : Dispatcher: thin
+[12/14/12 11:57:24 +0000 ubuntu (6870)] INFO : Application: development
+[12/14/12 11:57:24 +0000 ubuntu (6870)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 11:57:24 +0000 ubuntu (6870)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 6870
+[12/14/12 11:57:24 +0000 ubuntu (6870)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 14:31:43 +0000 ubuntu (8164)] INFO : Dispatcher: thin
+[12/14/12 14:31:43 +0000 ubuntu (8164)] INFO : Application: development
+[12/14/12 14:31:43 +0000 ubuntu (8164)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 14:31:43 +0000 ubuntu (8164)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 8164
+[12/14/12 14:31:43 +0000 ubuntu (8164)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 14:32:30 +0000 ubuntu (8248)] INFO : Dispatcher: thin
+[12/14/12 14:32:30 +0000 ubuntu (8248)] INFO : Application: development
+[12/14/12 14:32:30 +0000 ubuntu (8248)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 14:32:30 +0000 ubuntu (8248)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 8248
+[12/14/12 14:32:30 +0000 ubuntu (8248)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:03:12 +0000 ubuntu (9680)] INFO : Dispatcher: thin
+[12/14/12 15:03:12 +0000 ubuntu (9680)] INFO : Application: development
+[12/14/12 15:03:12 +0000 ubuntu (9680)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:03:12 +0000 ubuntu (9680)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 9680
+[12/14/12 15:03:12 +0000 ubuntu (9680)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:05:10 +0000 ubuntu (9787)] INFO : Dispatcher: thin
+[12/14/12 15:05:10 +0000 ubuntu (9787)] INFO : Application: development
+[12/14/12 15:05:10 +0000 ubuntu (9787)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:05:10 +0000 ubuntu (9787)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 9787
+[12/14/12 15:05:10 +0000 ubuntu (9787)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:07:46 +0000 ubuntu (9882)] INFO : Dispatcher: thin
+[12/14/12 15:07:46 +0000 ubuntu (9882)] INFO : Application: development
+[12/14/12 15:07:46 +0000 ubuntu (9882)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:07:46 +0000 ubuntu (9882)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 9882
+[12/14/12 15:07:46 +0000 ubuntu (9882)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:12:41 +0000 ubuntu (10008)] INFO : Dispatcher: thin
+[12/14/12 15:12:41 +0000 ubuntu (10008)] INFO : Application: development
+[12/14/12 15:12:41 +0000 ubuntu (10008)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:12:41 +0000 ubuntu (10008)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 10008
+[12/14/12 15:12:41 +0000 ubuntu (10008)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:17:48 +0000 ubuntu (10304)] INFO : Dispatcher: thin
+[12/14/12 15:17:48 +0000 ubuntu (10304)] INFO : Application: development
+[12/14/12 15:17:48 +0000 ubuntu (10304)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:17:48 +0000 ubuntu (10304)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 10304
+[12/14/12 15:17:48 +0000 ubuntu (10304)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:20:55 +0000 ubuntu (10416)] INFO : Dispatcher: thin
+[12/14/12 15:20:55 +0000 ubuntu (10416)] INFO : Application: development
+[12/14/12 15:20:55 +0000 ubuntu (10416)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:20:55 +0000 ubuntu (10416)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 10416
+[12/14/12 15:20:55 +0000 ubuntu (10416)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:21:52 +0000 ubuntu (10525)] INFO : Dispatcher: thin
+[12/14/12 15:21:52 +0000 ubuntu (10525)] INFO : Application: development
+[12/14/12 15:21:52 +0000 ubuntu (10525)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:21:52 +0000 ubuntu (10525)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 10525
+[12/14/12 15:21:52 +0000 ubuntu (10525)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:26:06 +0000 ubuntu (10642)] INFO : Dispatcher: thin
+[12/14/12 15:26:06 +0000 ubuntu (10642)] INFO : Application: development
+[12/14/12 15:26:06 +0000 ubuntu (10642)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:26:06 +0000 ubuntu (10642)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 10642
+[12/14/12 15:26:06 +0000 ubuntu (10642)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:33:31 +0000 ubuntu (10878)] INFO : Dispatcher: thin
+[12/14/12 15:33:31 +0000 ubuntu (10878)] INFO : Application: development
+[12/14/12 15:33:31 +0000 ubuntu (10878)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:33:31 +0000 ubuntu (10878)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 10878
+[12/14/12 15:33:31 +0000 ubuntu (10878)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:39:37 +0000 ubuntu (11030)] INFO : Dispatcher: thin
+[12/14/12 15:39:37 +0000 ubuntu (11030)] INFO : Application: development
+[12/14/12 15:39:37 +0000 ubuntu (11030)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:39:37 +0000 ubuntu (11030)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 11030
+[12/14/12 15:39:37 +0000 ubuntu (11030)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:58:08 +0000 ubuntu (11347)] INFO : Dispatcher: thin
+[12/14/12 15:58:08 +0000 ubuntu (11347)] INFO : Application: development
+[12/14/12 15:58:08 +0000 ubuntu (11347)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:58:08 +0000 ubuntu (11347)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 11347
+[12/14/12 15:58:08 +0000 ubuntu (11347)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 15:59:57 +0000 ubuntu (11452)] INFO : Dispatcher: thin
+[12/14/12 15:59:57 +0000 ubuntu (11452)] INFO : Application: development
+[12/14/12 15:59:57 +0000 ubuntu (11452)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 15:59:57 +0000 ubuntu (11452)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 11452
+[12/14/12 15:59:57 +0000 ubuntu (11452)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:20:33 +0000 ubuntu (12023)] INFO : Dispatcher: thin
+[12/14/12 16:20:33 +0000 ubuntu (12023)] INFO : Application: development
+[12/14/12 16:20:33 +0000 ubuntu (12023)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:20:33 +0000 ubuntu (12023)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 12023
+[12/14/12 16:20:33 +0000 ubuntu (12023)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:23:57 +0000 ubuntu (12132)] INFO : Dispatcher: thin
+[12/14/12 16:23:57 +0000 ubuntu (12132)] INFO : Application: development
+[12/14/12 16:23:57 +0000 ubuntu (12132)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:23:57 +0000 ubuntu (12132)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 12132
+[12/14/12 16:23:57 +0000 ubuntu (12132)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:26:58 +0000 ubuntu (12278)] INFO : Dispatcher: thin
+[12/14/12 16:26:58 +0000 ubuntu (12278)] INFO : Application: development
+[12/14/12 16:26:58 +0000 ubuntu (12278)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:26:58 +0000 ubuntu (12278)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 12278
+[12/14/12 16:26:58 +0000 ubuntu (12278)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:36:20 +0000 ubuntu (12431)] INFO : Dispatcher: thin
+[12/14/12 16:36:20 +0000 ubuntu (12431)] INFO : Application: development
+[12/14/12 16:36:20 +0000 ubuntu (12431)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:36:20 +0000 ubuntu (12431)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 12431
+[12/14/12 16:36:20 +0000 ubuntu (12431)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:37:22 +0000 ubuntu (12519)] INFO : Dispatcher: thin
+[12/14/12 16:37:22 +0000 ubuntu (12519)] INFO : Application: development
+[12/14/12 16:37:22 +0000 ubuntu (12519)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:37:22 +0000 ubuntu (12519)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 12519
+[12/14/12 16:37:22 +0000 ubuntu (12519)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:41:29 +0000 ubuntu (12636)] INFO : Dispatcher: thin
+[12/14/12 16:41:29 +0000 ubuntu (12636)] INFO : Application: development
+[12/14/12 16:41:29 +0000 ubuntu (12636)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:41:29 +0000 ubuntu (12636)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 12636
+[12/14/12 16:41:29 +0000 ubuntu (12636)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:44:31 +0000 ubuntu (12749)] INFO : Dispatcher: thin
+[12/14/12 16:44:31 +0000 ubuntu (12749)] INFO : Application: development
+[12/14/12 16:44:31 +0000 ubuntu (12749)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:44:31 +0000 ubuntu (12749)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 12749
+[12/14/12 16:44:31 +0000 ubuntu (12749)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:49:25 +0000 ubuntu (12877)] INFO : Dispatcher: thin
+[12/14/12 16:49:25 +0000 ubuntu (12877)] INFO : Application: development
+[12/14/12 16:49:25 +0000 ubuntu (12877)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:49:25 +0000 ubuntu (12877)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 12877
+[12/14/12 16:49:25 +0000 ubuntu (12877)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:51:58 +0000 ubuntu (12978)] INFO : Dispatcher: thin
+[12/14/12 16:51:58 +0000 ubuntu (12978)] INFO : Application: development
+[12/14/12 16:51:58 +0000 ubuntu (12978)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:51:58 +0000 ubuntu (12978)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 12978
+[12/14/12 16:51:58 +0000 ubuntu (12978)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:56:22 +0000 ubuntu (13127)] INFO : Dispatcher: thin
+[12/14/12 16:56:22 +0000 ubuntu (13127)] INFO : Application: development
+[12/14/12 16:56:22 +0000 ubuntu (13127)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:56:22 +0000 ubuntu (13127)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 13127
+[12/14/12 16:56:22 +0000 ubuntu (13127)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 16:56:57 +0000 ubuntu (13227)] INFO : Dispatcher: thin
+[12/14/12 16:56:57 +0000 ubuntu (13227)] INFO : Application: development
+[12/14/12 16:56:57 +0000 ubuntu (13227)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 16:56:57 +0000 ubuntu (13227)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 13227
+[12/14/12 16:56:57 +0000 ubuntu (13227)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 17:00:15 +0000 ubuntu (13351)] INFO : Dispatcher: thin
+[12/14/12 17:00:15 +0000 ubuntu (13351)] INFO : Application: development
+[12/14/12 17:00:15 +0000 ubuntu (13351)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 17:00:15 +0000 ubuntu (13351)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 13351
+[12/14/12 17:00:15 +0000 ubuntu (13351)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 17:00:55 +0000 ubuntu (13437)] INFO : Dispatcher: thin
+[12/14/12 17:00:55 +0000 ubuntu (13437)] INFO : Application: development
+[12/14/12 17:00:55 +0000 ubuntu (13437)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 17:00:55 +0000 ubuntu (13437)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 13437
+[12/14/12 17:00:55 +0000 ubuntu (13437)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log
+[12/14/12 17:08:48 +0000 ubuntu (13585)] INFO : Dispatcher: thin
+[12/14/12 17:08:48 +0000 ubuntu (13585)] INFO : Application: development
+[12/14/12 17:08:48 +0000 ubuntu (13585)] ERROR : No license key found.  Please edit your newrelic.yml file and insert your license key.
+[12/14/12 17:08:48 +0000 ubuntu (13585)] INFO : New Relic Ruby Agent 3.4.2.1 Initialized: pid = 13585
+[12/14/12 17:08:48 +0000 ubuntu (13585)] INFO : Agent Log at /home/user/workspace/compaa/log/newrelic_agent.log

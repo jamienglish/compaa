@@ -1,0 +1,42 @@
+!!!
+%head
+%script{:src => "https://raw.github.com/Phrogz/context-blender/master/context_blender.js", :type => "text/javascript"}
+%body
+%canvas#offScreenCanvas{:style => 'position: absolute; left: -9999999px;'}
+%canvas#onScreenCanvas
+:javascript
+  document.onreadystatechange = function () {
+        if (document.readyState == "complete" || document.readyState == "interactive"){
+
+        console.log('ready');
+                  
+        var differenceGifPath = '#{params[:filepath]}'
+        var oldImagePath = '#{params[:filepath].gsub('gif','png').gsub('differences_in_screenshots_this_run','reference_screenshots')}'
+        var newImagePath = '#{params[:filepath].gsub('gif','png').gsub('differences_in_screenshots_this_run','screenshots_generated_this_run')}'
+
+        var oldImg=document.createElement('img');
+        oldImg.style.height = '1500px';
+        oldImg.style.width = '1500px';
+        oldImg.src = oldImagePath
+        
+        var newImg=document.createElement('img');
+        newImg.style.width = '1500px';
+        newImg.style.height = '1500px';
+        newImg.src = newImagePath
+        
+        var over = document.getElementById('offScreenCanvas').getContext('2d'); 
+        over.drawImage(oldImg, 0, 0);
+
+        var under = document.getElementById('onScreenCanvas').getContext('2d');
+        under.drawImage(newImg, 0, 0);
+
+        over.blendOnto(under,'difference');
+
+        document.getElementById('onScreenCanvas').width = window.innerWidth;
+        document.getElementById('onScreenCanvas').height = window.innerHeight;
+
+        document.getElementById('offScreenCanvas').width = window.innerWidth;
+        document.getElementById('offScreenCanvas').height = window.innerHeight;
+        }
+  }
+%img{:src=>params[:filepath], :style=>'width: 50%; height: 50%;'}
