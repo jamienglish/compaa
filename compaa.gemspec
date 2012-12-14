@@ -30,4 +30,8 @@ Gem::Specification.new do |gem|
   end
 
   gem.add_dependency 'methadone', '~> 1.2.2'
+  gem.add_dependency 'sinatra'
+  gem.add_dependency 'thin'
+  gem.add_dependency 'haml'
+  gem.add_dependency 'watir-webdriver'
 end

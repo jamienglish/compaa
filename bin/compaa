@@ -3,14 +3,36 @@
 require 'optparse'
 require 'methadone'
 require 'compaa'
-require 'gtk2' unless ENV['APP_ENV'] == 'test'
+require 'sinatra'
+require 'watir-webdriver'
+require 'cgi'
 
 class App
   include Methadone::Main
   include Methadone::CLILogging
 
+  PORT = '7788'
+
   main do
+    
+    sinatra_pid = fork do
+      user_project_path = Dir.pwd
+
+      Dir.chdir(File.dirname(__FILE__))
+      Dir.chdir("../")
+      puts Dir.pwd
+
+      puts "ln -s  #{user_project_path} #{Dir.pwd}/public"
+
+      exec "thin start -p #{PORT}"
+    end
+
+    browser = Watir::Browser.new
+
+    sleep 3
+
     Compaa::DifferenceImage.all.each do |difference_image|
+      browser.goto "http://localhost:#{PORT}/?filepath=#{CGI::escape(difference_image.path)}"
       puts "Comparing: #{difference_image.path}"
       puts "Would you like to make this the reference image?"
 
@@ -23,21 +45,15 @@ class App
       puts "Approving: #{generated_image.path}"
       generated_image.create_reference_image if screenshot_approved?
     end
+
+    `kill -9 #{sinatra_pid}`
+
+    browser.close
+
   end
 
   def self.screenshot_approved?
-    if ENV['APP_ENV'] == 'test'
       STDIN.gets.chomp.downcase.start_with? 'y'
-    else
-      dialog = Gtk::MessageDialog.new(nil, Gtk::Dialog::DESTROY_WITH_PARENT,
-                                      Gtk::MessageDialog::QUESTION,
-                                      Gtk::MessageDialog::BUTTONS_YES_NO,
-                                      "Would you like to make this file the reference shot?")
-      approved = dialog.run == -8
-      dialog.destroy
-
-      approved
-    end
   end
 
   version Compaa::VERSION
