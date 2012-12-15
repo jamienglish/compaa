@@ -10,9 +10,9 @@
 
         console.log('ready');
                   
-        var differenceGifPath = '#{params[:filepath]}'
-        var oldImagePath = '#{params[:filepath].gsub('gif','png').gsub('differences_in_screenshots_this_run','reference_screenshots')}'
-        var newImagePath = '#{params[:filepath].gsub('gif','png').gsub('differences_in_screenshots_this_run','screenshots_generated_this_run')}'
+        var differenceGifPath = '#{params[:filepath]}';
+        var oldImagePath = '#{params[:filepath].gsub('gif','png').gsub('_difference.png','').gsub('differences_in_screenshots_this_run','reference_screenshots')}';
+        var newImagePath = '#{params[:filepath].gsub('gif','png').gsub('_difference.png','').gsub('differences_in_screenshots_this_run','screenshots_generated_this_run')}';
 
         var oldImg=document.createElement('img');
         oldImg.style.height = '1500px';
@@ -23,6 +23,12 @@
         newImg.style.width = '1500px';
         newImg.style.height = '1500px';
         newImg.src = newImagePath
+
+        document.getElementById('onScreenCanvas').width = window.innerWidth;
+        document.getElementById('onScreenCanvas').height = window.innerHeight;
+
+        document.getElementById('offScreenCanvas').width = window.innerWidth;
+        document.getElementById('offScreenCanvas').height = window.innerHeight;
         
         var over = document.getElementById('offScreenCanvas').getContext('2d'); 
         over.drawImage(oldImg, 0, 0);
@@ -31,12 +37,6 @@
         under.drawImage(newImg, 0, 0);
 
         over.blendOnto(under,'difference');
-
-        document.getElementById('onScreenCanvas').width = window.innerWidth;
-        document.getElementById('onScreenCanvas').height = window.innerHeight;
-
-        document.getElementById('offScreenCanvas').width = window.innerWidth;
-        document.getElementById('offScreenCanvas').height = window.innerHeight;
         }
   }
 %img{:src=>params[:filepath], :style=>'width: 50%; height: 50%;'}
