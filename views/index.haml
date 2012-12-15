@@ -3,7 +3,7 @@
 %script{:src => "https://raw.github.com/Phrogz/context-blender/master/context_blender.js", :type => "text/javascript"}
 %body
 %canvas#offScreenCanvas{:style => 'position: absolute; left: -9999999px;'}
-%canvas#onScreenCanvas
+%canvas#onScreenCanvas{style: 'float: left;'}
 :javascript
   document.onreadystatechange = function () {
         if (document.readyState == "complete" || document.readyState == "interactive"){
@@ -15,20 +15,16 @@
         var newImagePath = '#{params[:filepath].gsub('gif','png').gsub('_difference.png','').gsub('differences_in_screenshots_this_run','screenshots_generated_this_run')}';
 
         var oldImg=document.createElement('img');
-        oldImg.style.height = '1500px';
-        oldImg.style.width = '1500px';
         oldImg.src = oldImagePath
         
         var newImg=document.createElement('img');
-        newImg.style.width = '1500px';
-        newImg.style.height = '1500px';
         newImg.src = newImagePath
 
-        document.getElementById('onScreenCanvas').width = window.innerWidth;
-        document.getElementById('onScreenCanvas').height = window.innerHeight;
+        document.getElementById('onScreenCanvas').width = oldImg.width;
+        document.getElementById('onScreenCanvas').height = oldImg.height;
 
-        document.getElementById('offScreenCanvas').width = window.innerWidth;
-        document.getElementById('offScreenCanvas').height = window.innerHeight;
+        document.getElementById('offScreenCanvas').width = newImg.width;
+        document.getElementById('offScreenCanvas').height = newImg.height;
         
         var over = document.getElementById('offScreenCanvas').getContext('2d'); 
         over.drawImage(oldImg, 0, 0);
@@ -37,6 +33,9 @@
         under.drawImage(newImg, 0, 0);
 
         over.blendOnto(under,'difference');
+
+        document.getElementById('onScreenCanvas').style.width = '50%';
+        document.getElementById('onScreenCanvas').style.height = '50%';
         }
   }
-%img{:src=>params[:filepath], :style=>'width: 50%; height: 50%;'}
+%img{:src=>params[:filepath], :style=>'width: 50%; height: 50%; float: left'}
