@@ -4,6 +4,9 @@
 %body
 %canvas#offScreenCanvas{:style => 'position: absolute; left: -9999999px;'}
 %canvas#onScreenCanvas{style: 'float: left;'}
+%img{:src=>params[:filepath], :style=>'width: 50%; height: 50%; float: left'}
+%img#old{:style=>'float: left'}
+%img#new{:style=>'float: left'}
 :javascript
   document.onreadystatechange = function () {
         if (document.readyState == "complete" || document.readyState == "interactive"){
@@ -36,6 +39,14 @@
 
         document.getElementById('onScreenCanvas').style.width = '50%';
         document.getElementById('onScreenCanvas').style.height = '50%';
+
+        document.getElementById('old').src = oldImagePath;
+        document.getElementById('old').style.width = '50%';
+        document.getElementById('old').style.height = '50%';
+
+        document.getElementById('new').src = newImagePath;
+        document.getElementById('new').style.width = '50%';
+        document.getElementById('new').style.height = '50%';
         }
   }
-%img{:src=>params[:filepath], :style=>'width: 50%; height: 50%; float: left'}
+
