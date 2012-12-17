@@ -22,7 +22,11 @@ class App
       Dir.chdir("../")
       puts Dir.pwd
 
-      `ln -s  #{user_project_path} #{Dir.pwd}/public`
+      begin 
+        `ln -s  #{user_project_path} #{Dir.pwd}/public`
+      rescue
+        puts 'Error creating symbolic link'
+      end
 
       exec "thin start -p #{PORT}"
     end
