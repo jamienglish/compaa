@@ -28,6 +28,7 @@ class App
     end
 
     browser = Watir::Browser.new
+    browser.window.resize_to 1368, 1200
 
     sleep 3
 
