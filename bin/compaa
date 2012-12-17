@@ -22,7 +22,7 @@ class App
       Dir.chdir("../")
       puts Dir.pwd
 
-      puts "ln -s  #{user_project_path} #{Dir.pwd}/public"
+      `ln -s  #{user_project_path} #{Dir.pwd}/public`
 
       exec "thin start -p #{PORT}"
     end
