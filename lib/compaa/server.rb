@@ -18,14 +18,14 @@ module Compaa
       server.stop
     end
 
+    def port
+      @port || DEFAULT_PORT
+    end
+
     private
 
     def root_directory
       @root_directory || DEFAULT_ROOT
-    end
-
-    def port
-      @port || DEFAULT_PORT
     end
 
     def server

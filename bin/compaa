@@ -20,7 +20,7 @@ class App
     #sleep 3
 
     Compaa::DifferenceImage.all.each do |difference_image|
-      browser.goto "http://localhost:#{PORT}/?filepath=#{CGI::escape(difference_image.path)}"
+      browser.goto "http://localhost:#{server.port}/?filepath=#{CGI::escape(difference_image.path)}"
       puts "Comparing: #{difference_image.path}"
       puts "Would you like to make this the reference image?"
 
