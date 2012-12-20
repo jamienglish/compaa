@@ -3,7 +3,6 @@
 require 'optparse'
 require 'methadone'
 require 'compaa'
-require 'sinatra'
 require 'watir-webdriver'
 require 'cgi'
 
@@ -11,30 +10,14 @@ class App
   include Methadone::Main
   include Methadone::CLILogging
 
-  PORT = '7788'
-
   main do
-    
-    sinatra_pid = fork do
-      user_project_path = Dir.pwd
-
-      Dir.chdir(File.dirname(__FILE__))
-      Dir.chdir("../")
-      puts Dir.pwd
-
-      begin 
-        `ln -s  #{user_project_path} #{Dir.pwd}/public`
-      rescue
-        puts 'Error creating symbolic link'
-      end
-
-      exec "thin start -p #{PORT}"
-    end
+    server = Compaa::Server.new
+    server.start
 
     browser = Watir::Browser.new
     browser.window.resize_to 1368, 1200
 
-    sleep 3
+    #sleep 3
 
     Compaa::DifferenceImage.all.each do |difference_image|
       browser.goto "http://localhost:#{PORT}/?filepath=#{CGI::escape(difference_image.path)}"
@@ -51,14 +34,12 @@ class App
       generated_image.create_reference_image if screenshot_approved?
     end
 
-    `kill -9 #{sinatra_pid}`
-
+    server.stop
     browser.close
-
   end
 
   def self.screenshot_approved?
-      STDIN.gets.chomp.downcase.start_with? 'y'
+    STDIN.gets.chomp.downcase.start_with? 'y'
   end
 
   version Compaa::VERSION
