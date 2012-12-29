@@ -11,31 +11,31 @@ class App
   include Methadone::CLILogging
 
   main do
-    server = Compaa::Server.new
-    server.start
+    begin
+      server = Compaa::Server.new
+      server.start
 
-    browser = Watir::Browser.new
-    browser.window.resize_to 1368, 1200
+      browser = Watir::Browser.new
+      browser.window.resize_to 1368, 1200
 
-    #sleep 3
+      Compaa::DifferenceImage.all.each do |difference_image|
+        browser.goto "http://localhost:#{server.port}/?filepath=#{CGI::escape(difference_image.path)}"
+        puts "Comparing: #{difference_image.path}"
+        puts "Would you like to make this the reference image?"
 
-    Compaa::DifferenceImage.all.each do |difference_image|
-      browser.goto "http://localhost:#{server.port}/?filepath=#{CGI::escape(difference_image.path)}"
-      puts "Comparing: #{difference_image.path}"
-      puts "Would you like to make this the reference image?"
+        difference_image.create_reference_image if screenshot_approved?
+      end
 
-      difference_image.create_reference_image if screenshot_approved?
+      Compaa::GeneratedImage.all.each do |generated_image|
+        next if generated_image.has_reference_image?
+
+        puts "Approving: #{generated_image.path}"
+        generated_image.create_reference_image if screenshot_approved?
+      end
+    ensure
+      server.stop
+      browser.close
     end
-
-    Compaa::GeneratedImage.all.each do |generated_image|
-      next if generated_image.has_reference_image?
-
-      puts "Approving: #{generated_image.path}"
-      generated_image.create_reference_image if screenshot_approved?
-    end
-
-    server.stop
-    browser.close
   end
 
   def self.screenshot_approved?

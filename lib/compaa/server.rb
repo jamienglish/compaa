@@ -1,21 +1,26 @@
 require 'rack'
 require 'haml'
-require 'thin'
+require 'webrick'
 
 module Compaa
   class Server
+    class NullObject
+      def method_missing *args, &block; end
+    end
+
     attr_writer :root_directory, :port
 
-    Thin::Logging.silent = true
     DEFAULT_PORT = 7788
     DEFAULT_ROOT = Dir.pwd
 
     def start
-      Thread.new { server.start }
+      Thread.new do
+        Rack::Handler::WEBrick.run rack_app, Port: port, Logger: NullObject.new, AccessLog: [nil, nil]
+      end
     end
 
     def stop
-      server.stop
+      Rack::Handler::WEBrick.shutdown
     end
 
     def port
@@ -24,25 +29,18 @@ module Compaa
 
     private
 
-    def root_directory
-      @root_directory || DEFAULT_ROOT
-    end
-
-    def server
-      @server ||= Thin::Server.new rack_app, port
-    end
-
     def rack_app
-      t    = template
-      root = root_directory
+      _template = template
+      root = @root_directory || DEFAULT_ROOT
+
       Rack::Builder.new do
         use Rack::Static, urls: ['/artifacts'], root: root
 
         run ->(env) {
           locals = { filepath: Rack::Request.new(env).params['filepath'] }
-          body   = Haml::Engine.new(t).render Object.new, locals
+          body   = Haml::Engine.new(_template).render Object.new, locals
 
-          [ 200, { 'Content-Type' => 'text/html' }, body ]
+          [ 200, { 'Content-Type' => 'text/html' }, Array(body) ]
         }
       end
     end
