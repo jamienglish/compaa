@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  %w[rake aruba simplecov wrong minitest guard-minitest guard-cucumber].each do |lib|
+  %w[rake aruba simplecov wrong minitest guard-minitest guard-cucumber rack-test].each do |lib|
     gem.add_development_dependency lib
   end
 
@@ -30,8 +30,7 @@ Gem::Specification.new do |gem|
   end
 
   gem.add_dependency 'methadone', '~> 1.2.2'
-  gem.add_dependency 'sinatra'
-  gem.add_dependency 'thin'
   gem.add_dependency 'haml'
   gem.add_dependency 'watir-webdriver'
+  gem.add_dependency 'rack'
 end

@@ -29,7 +29,7 @@ Then /^the new reference screenshot should be the same as the sample generated s
   sample_generated_file_path = File.join fixture_image_path, 'sample_generated.png'
   new_reference_file_path = File.join current_dir, *%w[artifacts reference_screenshots dir image.png]
 
-  eventually :timeout => RUBY_PLATFORM == 'java' ? 20 : 3 do
+  eventually :timeout => RUBY_PLATFORM == 'java' ? 20 : 10 do
     new_reference_file_path.should be_the_same_file_as sample_generated_file_path
   end
 end
@@ -38,7 +38,7 @@ Then /^the new reference screenshot should be the same as the original reference
   original_reference_file_path = File.join fixture_image_path, 'sample_reference.png'
   new_reference_file_path = File.join current_dir, *%w[artifacts reference_screenshots dir image.png]
 
-  eventually :timeout => RUBY_PLATFORM == 'java' ? 20 : 3 do
+  eventually :timeout => RUBY_PLATFORM == 'java' ? 20 : 10 do
     new_reference_file_path.should be_the_same_file_as original_reference_file_path
   end
 end
