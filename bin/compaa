@@ -3,7 +3,11 @@
 require 'optparse'
 require 'methadone'
 require 'compaa'
-require 'watir-webdriver'
+if ENV['TRAVIS'] == 'true'
+  require 'watir-webdriver-fake'
+else
+  require 'watir-webdriver'
+end
 require 'cgi'
 
 class App

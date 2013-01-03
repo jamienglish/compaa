@@ -4,10 +4,6 @@ require 'webrick'
 
 module Compaa
   class Server
-    class NullObject
-      def method_missing *args, &block; end
-    end
-
     attr_writer :root_directory, :port
 
     DEFAULT_PORT = 7788
