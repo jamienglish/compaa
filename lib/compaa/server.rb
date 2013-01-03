@@ -11,7 +11,7 @@ module Compaa
 
     def start
       Thread.new do
-        Rack::Handler::WEBrick.run rack_app, Port: port, Logger: NullObject.new, AccessLog: [nil, nil]
+        Rack::Handler::WEBrick.run rack_app, :Port => port, :Logger => NullObject.new, :AccessLog => [nil, nil]
       end
     end
 
@@ -30,10 +30,10 @@ module Compaa
       root = @root_directory || DEFAULT_ROOT
 
       Rack::Builder.new do
-        use Rack::Static, urls: ['/artifacts'], root: root
+        use Rack::Static, :urls => ['/artifacts'], :root => root
 
         run ->(env) {
-          locals = { filepath: Rack::Request.new(env).params['filepath'] }
+          locals = { :filepath => Rack::Request.new(env).params['filepath'] }
           body   = Haml::Engine.new(_template).render Object.new, locals
 
           [ 200, { 'Content-Type' => 'text/html' }, Array(body) ]
