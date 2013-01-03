@@ -32,7 +32,7 @@ module Compaa
       Rack::Builder.new do
         use Rack::Static, :urls => ['/artifacts'], :root => root
 
-        run ->(env) {
+        run lambda { |env|
           locals = { :filepath => Rack::Request.new(env).params['filepath'] }
           body   = Haml::Engine.new(_template).render Object.new, locals
 
