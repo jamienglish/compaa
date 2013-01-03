@@ -3,6 +3,7 @@
 require 'optparse'
 require 'methadone'
 require 'compaa'
+require 'rack'
 if ENV['TRAVIS'] == 'true'
   require 'watir-webdriver-fake'
 else
@@ -14,16 +15,17 @@ class App
   include Methadone::Main
   include Methadone::CLILogging
 
+  PORT = 7788
+
   main do
     begin
-      server = Compaa::Server.new
-      server.start
+      start_server_in_background
 
       browser = Watir::Browser.new
       browser.window.resize_to 1368, 1200
 
       Compaa::DifferenceImage.all.each do |difference_image|
-        browser.goto "http://localhost:#{server.port}/?filepath=#{CGI::escape(difference_image.path)}"
+        browser.goto "http://localhost:#{PORT}/?filepath=#{CGI::escape(difference_image.path)}"
         puts "Comparing: #{difference_image.path}"
         puts "Would you like to make this the reference image?"
 
@@ -37,9 +39,22 @@ class App
         generated_image.create_reference_image if screenshot_approved?
       end
     ensure
-      server.stop
+      shutdown_server
       browser.close
     end
+  end
+
+  def self.start_server_in_background
+    Thread.new do
+      Rack::Handler::WEBrick.run Compaa::RackApp.new.app,
+        :Port      => PORT,
+        :Logger    => Compaa::NullObject.new,
+        :AccessLog => [nil, nil]
+    end
+  end
+
+  def self.shutdown_server
+    Rack::Handler::WEBrick.shutdown
   end
 
   def self.screenshot_approved?
