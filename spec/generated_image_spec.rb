@@ -65,4 +65,16 @@ describe Compaa::GeneratedImage do
 
     subject.reference_path.must_equal reference_path
   end
+
+  it "deletes its corresponding difference image" do
+    subject.file_manager = mock_file_manager
+    difference_path =
+      File.join %w[artifacts differences_in_screenshots_this_run dir file.png_difference.gif]
+
+    mock_file_manager.expect :rm, true, [difference_path]
+
+    subject.delete_difference_image
+
+    mock_file_manager.verify
+  end
 end
