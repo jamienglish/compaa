@@ -13,6 +13,10 @@
     %button#animationButton Animation
     %button#oldImageButton Old Image
     %button#newImageButton New Image
+    %form{:class => 'artifacts', :method => 'POST', :action => '/screenshots'}
+      %input#filepath{:name => 'filepath', :type => 'hidden', :value => 'boo'}
+      %input{:type => 'submit', :value => 'Accept'}
+
   :javascript
     var compaa = {
       differenceGifPath: '#{filepath}',
@@ -20,6 +24,8 @@
       newImagePath: '#{filepath.gsub('gif', 'png').gsub('_difference.png', '').gsub('differences_in_screenshots_this_run','screenshots_generated_this_run')}',
 
       init: function() {
+        document.getElementById('filepath').value = this.newImagePath;
+
         var oldImg=document.createElement('img');
         oldImg.src = compaa.oldImagePath
         
