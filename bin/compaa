@@ -25,7 +25,7 @@ class App
       browser.window.resize_to 1368, 1200
 
       Compaa::DifferenceImage.all.each do |difference_image|
-        browser.goto "http://localhost:#{PORT}/?filepath=#{CGI::escape(difference_image.path)}"
+        browser.goto "http://localhost:#{PORT}/?filepath=#{difference_image.path}"
         puts "Comparing: #{difference_image.path}"
         puts "Would you like to make this the reference image?"
 
@@ -35,7 +35,9 @@ class App
       Compaa::GeneratedImage.all.each do |generated_image|
         next if generated_image.has_reference_image?
 
+        browser.goto "http://localhost:#{PORT}/#{generated_image.path}"
         puts "Approving: #{generated_image.path}"
+        puts "Would you like accept this new reference image?"
         generated_image.create_reference_image if screenshot_approved?
       end
     ensure
