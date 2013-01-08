@@ -14,11 +14,11 @@
     %button#oldImageButton Old Image
     %button#newImageButton New Image
     %form{:class => 'artifacts', :method => 'POST', :action => '/screenshots'}
-      %input#filepath{:name => 'filepath', :type => 'hidden', :value => 'boo'}
+      %input#filepath{:name => 'filepath', :type => 'hidden', :value => ''}
       %input{:type => 'submit', :value => 'Accept'}
 
   :javascript
-    var compaa = {
+    var Compaa = {
       differenceGifPath: '#{filepath}',
       oldImagePath: '#{filepath.gsub('gif', 'png').gsub('_difference.png', '').gsub('differences_in_screenshots_this_run','reference_screenshots')}',
       newImagePath: '#{filepath.gsub('gif', 'png').gsub('_difference.png', '').gsub('differences_in_screenshots_this_run','screenshots_generated_this_run')}',
@@ -27,10 +27,10 @@
         document.getElementById('filepath').value = this.newImagePath;
 
         var oldImg=document.createElement('img');
-        oldImg.src = compaa.oldImagePath
+        oldImg.src = this.oldImagePath
         
         var newImg=document.createElement('img');
-        newImg.src = compaa.newImagePath
+        newImg.src = this.newImagePath
 
         document.getElementById('difference').width = oldImg.width;
         document.getElementById('difference').height = oldImg.height;
@@ -46,15 +46,15 @@
 
         over.blendOnto(under,'difference');
 
-        document.getElementById('oldImage').src = compaa.oldImagePath;
-        document.getElementById('newImage').src = compaa.newImagePath;
+        document.getElementById('oldImage').src = this.oldImagePath;
+        document.getElementById('newImage').src = this.newImagePath;
 
-        compaa.show('difference');
+        this.show('difference');
 
-        document.getElementById('differenceButton').onclick = function(){compaa.show('difference')};
-        document.getElementById('animationButton').onclick = function(){compaa.show('animation')};
-        document.getElementById('oldImageButton').onclick = function(){compaa.show('oldImage')};
-        document.getElementById('newImageButton').onclick = function(){compaa.show('newImage')};
+        document.getElementById('differenceButton').onclick = function(){Compaa.show('difference')};
+        document.getElementById('animationButton').onclick = function(){Compaa.show('animation')};
+        document.getElementById('oldImageButton').onclick = function(){Compaa.show('oldImage')};
+        document.getElementById('newImageButton').onclick = function(){Compaa.show('newImage')};
       },
       show: function(mode) {
         document.getElementById('difference').style.display = 'none';
@@ -81,6 +81,6 @@
 
     document.onreadystatechange = function() {
       if (document.readyState == "complete" || document.readyState == "interactive") {
-        compaa.init();
+        Compaa.init();
       }
     }
