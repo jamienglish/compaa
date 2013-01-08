@@ -34,6 +34,14 @@ module Compaa
       end
     end
 
+    describe "GET '/script.js'" do
+      it "returns our javascript" do
+        get '/script.js'
+        assert last_response.ok?
+        assert_equal 'application/javascript', last_response.headers['Content-Type']
+      end
+    end
+
     describe "GET '/artifacts'" do
       it "serves static files" do
         touch_file 'artifacts/file.png'
