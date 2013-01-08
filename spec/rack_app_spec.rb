@@ -29,7 +29,7 @@ module Compaa
         get '/'
         assert_equal 404, last_response.status
 
-        get '/', filepath: 'some/path'
+        get '/', :filepath => 'some/path'
         assert last_response.ok?
       end
     end
@@ -64,7 +64,7 @@ module Compaa
         touch_file 'artifacts/differences_in_screenshots_this_run/file.png_difference.gif'
 
         refute File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
-        post '/screenshots', filepath: 'artifacts/screenshots_generated_this_run/file.png'
+        post '/screenshots', :filepath => 'artifacts/screenshots_generated_this_run/file.png'
         assert File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
       end
     end
