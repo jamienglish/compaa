@@ -10,6 +10,7 @@ else
   require 'watir-webdriver'
 end
 require 'cgi'
+require 'fileutils'
 
 class App
   include Methadone::Main
@@ -60,7 +61,26 @@ class App
   end
 
   def self.screenshot_approved?
-    STDIN.gets.chomp.downcase.start_with? 'y'
+    while input = get_input
+      break if yes_or_no?
+
+      puts "It's a simple yes/no question, idiot!"
+    end
+
+    input == 'y'
+  end
+
+  def self.yes_or_no? input
+    input[0] == 'y' || input[0] == 'n'
+  end
+
+  def self.get_input
+    input = STDIN.gets
+
+    input.encode!('UTF-16', 'UTF-8', :invalid => :replace, :replace => '')
+    input.encode!('UTF-8', 'UTF-16')
+
+    input.downcase.chomp
   end
 
   version Compaa::VERSION
