@@ -19,12 +19,12 @@ class App
   PORT = 7788
 
   main do
+    start_server_in_background
+
+    browser = Watir::Browser.new
+    browser.window.resize_to 1368, 1200
+
     begin
-      start_server_in_background
-
-      browser = Watir::Browser.new
-      browser.window.resize_to 1368, 1200
-
       Compaa::DifferenceImage.all.each do |difference_image|
         browser.goto "http://localhost:#{PORT}/?filepath=#{difference_image.path}"
         puts "Comparing: #{difference_image.path}"
@@ -62,7 +62,7 @@ class App
 
   def self.screenshot_approved?
     while input = get_input
-      break if yes_or_no?
+      break if yes_or_no? input
 
       puts "It's a simple yes/no question, idiot!"
     end
@@ -71,7 +71,7 @@ class App
   end
 
   def self.yes_or_no? input
-    input[0] == 'y' || input[0] == 'n'
+    input == 'y' || input == 'n'
   end
 
   def self.get_input
@@ -80,7 +80,7 @@ class App
     input.encode!('UTF-16', 'UTF-8', :invalid => :replace, :replace => '')
     input.encode!('UTF-8', 'UTF-16')
 
-    input.downcase.chomp
+    input.downcase.chomp[0]
   end
 
   version Compaa::VERSION
