@@ -20,7 +20,7 @@ class App
 
   main do
     server_thread = Thread.new do
-      Rack::Server.start(:app => Compaa::RackApp.new.app, :Port => PORT)
+      Rack::Server.start(:app => Compaa::RackApp.new, :Port => PORT)
     end
 
     browser = Watir::Browser.new

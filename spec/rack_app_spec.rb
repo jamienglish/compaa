@@ -8,20 +8,20 @@ module Compaa
 
     before do
       @tmp_dir = File.expand_path('tmp', File.dirname(__FILE__))
-      FileUtils.mkdir_p @tmp_dir
+      FileUtils.mkdir_p(@tmp_dir)
     end
 
     after do
-      FileUtils.rm_rf @tmp_dir
+      FileUtils.rm_rf(@tmp_dir)
     end
 
     def app
-      RackApp.new.tap { |a| a.root_directory = @tmp_dir }.app
+      RackApp.new(@tmp_dir)
     end
 
     def touch_file path
-      FileUtils.mkdir_p File.dirname(File.join(@tmp_dir, path))
-      FileUtils.touch   File.join(@tmp_dir, path)
+      FileUtils.mkdir_p(File.dirname(File.join(@tmp_dir, path)))
+      FileUtils.touch(File.join(@tmp_dir, path))
     end
 
     describe "GET '/'" do
