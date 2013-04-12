@@ -15,6 +15,10 @@ module Compaa
         use Rack::Static, :urls => ['/artifacts'], :root => root
 
         run lambda { |env|
+          def four_oh_four
+            [ 404, {}, ['Not found'] ]
+          end
+
           request = Rack::Request.new(env)
 
           case request.path
@@ -25,7 +29,7 @@ module Compaa
 
               [ 200, { 'Content-Type' => 'text/html' }, [body] ]
             else
-              [ 404, {}, ['Not found'] ]
+              four_oh_four
             end
           when '/script.js'
             js = File.read(File.expand_path('script.js', File.dirname(__FILE__)))
@@ -39,10 +43,10 @@ module Compaa
 
               [ 200, { 'Content-Type' => 'text/plain' }, ['Success'] ]
             else
-              [ 404, {}, ['Not found'] ]
+              four_oh_four
             end
           else
-            [ 404, {}, ['Not found'] ]
+            four_oh_four
           end
         }
       end
