@@ -19,7 +19,9 @@ class App
   PORT = 7788
 
   main do
-    start_server_in_background
+    server_thread = Thread.new do
+      Rack::Server.start(:app => Compaa::RackApp.new.app, :Port => PORT)
+    end
 
     browser = Watir::Browser.new
     browser.window.resize_to 1368, 1200
@@ -42,22 +44,9 @@ class App
         generated_image.create_reference_image if screenshot_approved?
       end
     ensure
-      shutdown_server
+      server_thread.kill
       browser.close
     end
-  end
-
-  def self.start_server_in_background
-    Thread.new do
-      Rack::Handler::WEBrick.run Compaa::RackApp.new.app,
-        :Port      => PORT,
-        :Logger    => Compaa::NullObject.new,
-        :AccessLog => [nil, nil]
-    end
-  end
-
-  def self.shutdown_server
-    Rack::Handler::WEBrick.shutdown
   end
 
   def self.screenshot_approved?
