@@ -3,6 +3,23 @@ require 'haml'
 
 module Compaa
   class RackApp
+    class << self
+      alias :new! :new
+    end
+
+    def self.new
+      me = self
+      Rack::Builder.new do
+        use Rack::Static, :urls => ['/artifacts'], :root => Dir.pwd
+        run(me.new!)
+      end
+    end
+
+    def call(env)
+      request = Request.new(Rack::Request.new(env))
+      request.response
+    end
+
     class Request
       def initialize(request)
         @request = request
@@ -63,23 +80,6 @@ module Compaa
       def four_oh_four
         [ 404, {}, ['Not found'] ]
       end
-    end
-
-    class << self
-      alias :new! :new
-    end
-
-    def self.new
-      me = self
-      Rack::Builder.new do
-        use Rack::Static, :urls => ['/artifacts'], :root => Dir.pwd
-        run(me.new!)
-      end
-    end
-
-    def call(env)
-      request = Request.new(Rack::Request.new(env))
-      request.response
     end
   end
 end
