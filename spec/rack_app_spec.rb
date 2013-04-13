@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'rack/test'
-require 'pry'
 
 module Compaa
   describe RackApp do
@@ -16,7 +15,7 @@ module Compaa
     end
 
     def app
-      RackApp.new(@tmp_dir)
+      RackApp.new
     end
 
     def touch_file path
@@ -44,12 +43,14 @@ module Compaa
 
     describe "GET '/artifacts'" do
       it "serves static files" do
-        touch_file 'artifacts/file.png'
+        Dir.stub(:pwd, @tmp_dir) do
+          touch_file 'artifacts/file.png'
 
-        get '/artifacts/file.png'
+          get '/artifacts/file.png'
 
-        assert last_response.ok?
-        assert_equal 'image/png', last_response.headers['Content-Type']
+          assert last_response.ok?
+          assert_equal 'image/png', last_response.headers['Content-Type']
+        end
       end
     end
 
@@ -60,12 +61,14 @@ module Compaa
       end
 
       it "copies the supplied image path to its reference image" do
-        touch_file 'artifacts/screenshots_generated_this_run/file.png'
-        touch_file 'artifacts/differences_in_screenshots_this_run/file.png_difference.gif'
+        Dir.stub(:pwd, @tmp_dir) do
+          touch_file 'artifacts/screenshots_generated_this_run/file.png'
+          touch_file 'artifacts/differences_in_screenshots_this_run/file.png_difference.gif'
 
-        refute File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
-        post '/screenshots', :filepath => 'artifacts/screenshots_generated_this_run/file.png'
-        assert File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
+          refute File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
+          post '/screenshots', :filepath => 'artifacts/screenshots_generated_this_run/file.png'
+          assert File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
+        end
       end
     end
   end

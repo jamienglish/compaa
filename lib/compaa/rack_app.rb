@@ -3,47 +3,48 @@ require 'haml'
 
 module Compaa
   class RackApp
-    attr_writer :root_directory
-
-    DEFAULT_ROOT = Dir.pwd
-
-    class << self
-      alias :new! :new
-    end
-
-    def self.new(root = DEFAULT_ROOT)
-      me = self
-      Rack::Builder.new do
-        use Rack::Static, :urls => ['/artifacts'], :root => root
-        run(me.new!(root))
+    class Request
+      def initialize(request)
+        @request = request
       end
-    end
 
-    def initialize(root)
-      @root_directory = root
-    end
+      def response
+        case @request.request_method
+        when 'GET'  then get
+        when 'POST' then post
+        else        four_oh_four
+        end
+      end
 
-    def call(env)
-      template = File.read File.expand_path 'template.haml', File.dirname(__FILE__)
-      request = Rack::Request.new(env)
+      def get
+        case @request.path
+        when '/'          then index
+        when '/script.js' then script
+        else              four_oh_four
+        end
+      end
 
-      case request.path
-      when '/'
-        if request.params.has_key?('filepath')
-          locals = { :filepath => request.params['filepath'] }
-          body   = Haml::Engine.new(template).render Object.new, locals
-
-          [ 200, { 'Content-Type' => 'text/html' }, [body] ]
+      def post
+        if @request.path == '/screenshots'
+          screenshots
         else
           four_oh_four
         end
-      when '/script.js'
-        js = File.read(File.expand_path('script.js', File.dirname(__FILE__)))
+      end
 
-        [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
-      when '/screenshots'
-        if request.request_method == 'POST' && request.params.has_key?('filepath')
-          generated_image = GeneratedImage.new File.join(@root_directory, request.params['filepath'])
+      def index
+        return four_oh_four unless @request.params.has_key?('filepath')
+
+        template = File.read File.expand_path 'template.haml', File.dirname(__FILE__)
+        locals = { :filepath => @request.params['filepath'] }
+        body   = Haml::Engine.new(template).render Object.new, locals
+
+        [ 200, { 'Content-Type' => 'text/html' }, [body] ]
+      end
+
+      def screenshots
+        if @request.params.has_key?('filepath')
+          generated_image = GeneratedImage.new File.join(Dir.pwd, @request.params['filepath'])
           generated_image.create_reference_image
           generated_image.delete_difference_image
 
@@ -51,15 +52,34 @@ module Compaa
         else
           four_oh_four
         end
-      else
-        four_oh_four
+      end
+
+      def script
+        js = File.read(File.expand_path('script.js', File.dirname(__FILE__)))
+
+        [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
+      end
+
+      def four_oh_four
+        [ 404, {}, ['Not found'] ]
       end
     end
 
-    private
+    class << self
+      alias :new! :new
+    end
 
-    def four_oh_four
-      [ 404, {}, ['Not found'] ]
+    def self.new
+      me = self
+      Rack::Builder.new do
+        use Rack::Static, :urls => ['/artifacts'], :root => Dir.pwd
+        run(me.new!)
+      end
+    end
+
+    def call(env)
+      request = Request.new(Rack::Request.new(env))
+      request.response
     end
   end
 end
