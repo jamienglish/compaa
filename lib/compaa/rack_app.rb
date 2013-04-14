@@ -36,7 +36,7 @@ module Compaa
       def get
         case @request.path
         when '/'          then index
-        when '/script.js' then script
+        when '/compaa.js' then script
         else              four_oh_four
         end
       end
@@ -72,7 +72,7 @@ module Compaa
       end
 
       def script
-        js = File.read(File.expand_path('script.js', File.dirname(__FILE__)))
+        js = File.read(File.expand_path('compaa.js', File.dirname(__FILE__)))
 
         [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
       end

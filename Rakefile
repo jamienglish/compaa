@@ -3,6 +3,8 @@ require 'bundler'
 require 'rake'
 require 'rake/testtask'
 require 'cucumber/rake/task'
+require 'jasmine'
+load 'jasmine/tasks/jasmine.rake'
 
 Bundler::GemHelper.install_tasks
 

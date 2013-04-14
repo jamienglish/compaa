@@ -1,0 +1,6 @@
+src_files:
+  - spec/javascripts/support/jquery-2.0.0-beta3.js
+  - lib/compaa/compaa.js
+
+spec_files:
+  - '**CompaaSpec.js'
