@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   %w( rake aruba simplecov wrong minitest guard-minitest guard-cucumber
-      rack-test jasmine ).each do |lib|
+      rack-test capybara jasmine ).each do |lib|
     gem.add_development_dependency lib
   end
 
