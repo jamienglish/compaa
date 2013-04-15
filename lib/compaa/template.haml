@@ -1,7 +1,6 @@
 !!!
 %head
   %script{src: "https://raw.github.com/Phrogz/context-blender/master/context_blender.js", type: "text/javascript"}
-
   %script{:src => '/compaa.js'}
   :javascript
     document.onreadystatechange = function() {
@@ -14,7 +13,7 @@
 %body
   %canvas#offScreenCanvas{style: 'position: absolute; left: -9999999px;'}
   %canvas#difference
-  %img#animation{src: filepath, style: 'display: none'}
+  %img#animation{style: 'display: none'}
   %img#oldImage{style: 'display: none'}
   %img#newImage{style: 'display: none'}
 
