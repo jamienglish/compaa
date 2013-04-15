@@ -10,7 +10,7 @@ module Compaa
     def self.new
       me = self
       Rack::Builder.new do
-        use Rack::Static, :urls => ['/artifacts'], :root => Dir.pwd
+        use Rack::Static, :urls => ['/artifacts/'], :root => Dir.pwd
         run(me.new!)
       end
     end
@@ -35,9 +35,10 @@ module Compaa
 
       def get
         case @request.path
-        when '/'          then index
-        when '/compaa.js' then script
-        else              four_oh_four
+        when '/'               then index
+        when '/compaa.js'      then script
+        when '/artifacts.json' then artifacts_json
+        else                        four_oh_four
         end
       end
 
@@ -50,11 +51,8 @@ module Compaa
       end
 
       def index
-        return four_oh_four unless @request.params.has_key?('filepath')
-
         template = File.read File.expand_path 'template.haml', File.dirname(__FILE__)
-        locals = { :filepath => @request.params['filepath'] }
-        body   = Haml::Engine.new(template).render Object.new, locals
+        body   = Haml::Engine.new(template).render
 
         [ 200, { 'Content-Type' => 'text/html' }, [body] ]
       end
@@ -75,6 +73,12 @@ module Compaa
         js = File.read(File.expand_path('compaa.js', File.dirname(__FILE__)))
 
         [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
+      end
+
+      def artifacts_json
+        json = { difference_images: DifferenceImage.all.map(&:path) }.to_json
+
+        [ 200, { 'Content-Type' => 'application/json' }, [json] ]
       end
 
       def four_oh_four

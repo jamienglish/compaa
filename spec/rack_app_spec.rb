@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'rack/test'
+require 'json'
 
 module Compaa
   describe RackApp do
@@ -27,10 +28,7 @@ module Compaa
       describe '/' do
         it "requires the filepath param" do
           get '/'
-          assert_equal 404, last_response.status
-
-          get '/', :filepath => 'some/path'
-          assert last_response.ok?
+          assert_equal 200, last_response.status
         end
       end
 
@@ -43,6 +41,20 @@ module Compaa
       end
 
       describe '/artifacts' do
+        it "serves artifacts JSON" do
+          image_paths = %w( one two three ).map { |name|
+            "artifacts/differences_in_screenshots_this_run/#{name}.png_difference.gif"
+          }
+          images        = image_paths.map { |path| DifferenceImage.new(path) }
+          expected_json = { difference_images: image_paths }
+
+          DifferenceImage.stub(:all, images) do
+            get '/artifacts.json'
+            assert_equal 'application/json', last_response.content_type
+            assert_equal expected_json.to_json,      last_response.body
+          end
+        end
+
         it "serves static files" do
           Dir.stub(:pwd, @tmp_dir) do
             touch_file 'artifacts/file.png'
