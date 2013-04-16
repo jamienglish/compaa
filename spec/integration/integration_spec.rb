@@ -1,7 +1,9 @@
 require 'spec_helper'
 require 'capybara'
 
-Capybara.app = Compaa::RackApp.new
+Dir.chdir 'tmp/homemove' do
+  Capybara.app = Compaa::RackApp.new
+end
 Capybara.default_driver = :selenium
 
 describe "accepting screenshots from the browser" do
@@ -13,11 +15,11 @@ describe "accepting screenshots from the browser" do
   end
 
   it "Accepts via clicking accept" do
-    Dir.stub(:pwd, 'tmp/homemove') do
+    Dir.chdir 'tmp/homemove' do
       homemove_dir = 'artifacts/differences_in_screenshots_this_run/homemove'
       visit '/'
 
-      assert_equal "#{homemove_dir}/step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png_difference.gif",
+      assert_match %r{#{homemove_dir}/step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png_difference.gif$},
         page.find('img#animation', visible: false)['src']
 
       click_button 'Accept'

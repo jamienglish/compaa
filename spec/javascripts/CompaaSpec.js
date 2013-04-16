@@ -100,4 +100,23 @@ describe("Script", function() {
       expect($('#newImage').css('display')).toEqual('block');
     });
   });
+
+  describe("getDifferenceImages(callback)", function() {
+    it("gets artifacts json", function() {
+      var callback = jasmine.createSpy();
+
+      compaa.compaaHost = 'http://localhost:4567';
+      compaa.getDifferenceImages(callback);
+
+      waitsFor(function() {
+        return callback.callCount > 0;
+      }, 'getDifferenceImages callback never got called', 1000);
+
+      runs(function() {
+        var differenceImages = callback.mostRecentCall.args[0];
+        expect(differenceImages.length).toEqual(3);
+        expect(differenceImages[0]).toEqual('artifacts/differences_in_screenshots_this_run/one.png_difference.gif');
+      });
+    });
+  });
 });
