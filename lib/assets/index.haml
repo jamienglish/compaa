@@ -1,14 +1,14 @@
 !!!
 %head
   %script{src: "https://raw.github.com/Phrogz/context-blender/master/context_blender.js", type: "text/javascript"}
+  %script{:src => '/underscore.js'}
+  %script{:src => '/jquery-2.0.0.js'}
   %script{:src => '/compaa.js'}
   :javascript
-    document.onreadystatechange = function() {
-      if (document.readyState == "complete" || document.readyState == "interactive") {
-        var compaa = new Compaa();
-        compaa.init();
-      }
-    };
+    document.addEventListener("DOMContentLoaded", function() {
+      var compaa = new Compaa();
+      compaa.init();
+    }, false);
 
 %body
   %canvas#offScreenCanvas{style: 'position: absolute; left: -9999999px;'}
@@ -24,4 +24,4 @@
     %button#newImageButton New Image
     %form{:class => 'artifacts', :method => 'POST', :action => '/screenshots'}
       %input#filepath{:name => 'filepath', :type => 'hidden', :value => ''}
-      %input{:type => 'submit', :value => 'Accept'}
+      %input{:type => 'submit', :value => 'Accept', :id => 'accept'}

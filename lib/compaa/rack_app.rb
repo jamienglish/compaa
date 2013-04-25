@@ -1,5 +1,6 @@
 require 'rack'
 require 'haml'
+require 'json'
 
 module Compaa
   class RackApp
@@ -35,10 +36,12 @@ module Compaa
 
       def get
         case @request.path
-        when '/'               then index
-        when '/compaa.js'      then script
-        when '/artifacts.json' then artifacts_json
-        else                        four_oh_four
+        when '/'                then index
+        when '/underscore.js'   then underscore
+        when '/jquery-2.0.0.js' then jquery
+        when '/compaa.js'       then script
+        when '/artifacts.json'  then artifacts_json
+        else                         four_oh_four
         end
       end
 
@@ -51,8 +54,8 @@ module Compaa
       end
 
       def index
-        template = File.read File.expand_path 'template.haml', File.dirname(__FILE__)
-        body   = Haml::Engine.new(template).render
+        template = File.read File.expand_path '../assets/index.haml', File.dirname(__FILE__)
+        body = Haml::Engine.new(template).render
 
         [ 200, { 'Content-Type' => 'text/html' }, [body] ]
       end
@@ -70,7 +73,19 @@ module Compaa
       end
 
       def script
-        js = File.read(File.expand_path('compaa.js', File.dirname(__FILE__)))
+        js = File.read(File.expand_path('../assets/compaa.js', File.dirname(__FILE__)))
+
+        [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
+      end
+
+      def jquery
+        js = File.read(File.expand_path('../assets/jquery-2.0.0.js', File.dirname(__FILE__)))
+
+        [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
+      end
+
+      def underscore
+        js = File.read(File.expand_path('../assets/underscore.js', File.dirname(__FILE__)))
 
         [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
       end

@@ -3,21 +3,14 @@ describe("Script", function() {
 
   beforeEach(function() {
     compaa = new Compaa();
+    compaa.compaaHost = 'http://localhost:4567';
+    setupImages();
+    setupButtonsAndForm();
   });
 
-  describe("filepath()", function() {
-    it("pulls the filepath param from the query string", function() {
-      spyOn(compaa, 'queryString').andReturn('this=that&filepath=artifacts/file.png');
-      expect(compaa.filepath()).toEqual('artifacts/file.png');
-    });
-  });
-
-  describe("differenceGifPath()", function() {
-    it("is the same as the filepath", function() {
-      var filepath = 'artifacts/differences_in_screenshots_this_run/firefox_home_move.png_difference.gif';
-      spyOn(compaa, 'filepath').andReturn(filepath);
-      expect(compaa.differenceGifPath()).toEqual(filepath);
-    });
+  afterEach(function() {
+    tearDownImages();
+    tearDownButtonsAndForm();
   });
 
   describe("oldImagePath()", function() {
@@ -27,7 +20,7 @@ describe("Script", function() {
       filepath             = 'artifacts/differences_in_screenshots_this_run/firefox_home_move.png_difference.gif';
       expectedOldImagePath = 'artifacts/reference_screenshots/firefox_home_move.png'
 
-      spyOn(compaa, 'filepath').andReturn(filepath);
+      spyOn(compaa, 'differenceGifPath').andReturn(filepath);
 
       expect(compaa.oldImagePath()).toEqual(expectedOldImagePath);
     });
@@ -40,38 +33,16 @@ describe("Script", function() {
       filepath             = 'artifacts/differences_in_screenshots_this_run/firefox_home_move.png_difference.gif';
       expectedNewImagePath = 'artifacts/screenshots_generated_this_run/firefox_home_move.png'
 
-      spyOn(compaa, 'filepath').andReturn(filepath);
+      spyOn(compaa, 'differenceGifPath').andReturn(filepath);
 
       expect(compaa.newImagePath()).toEqual(expectedNewImagePath);
-    });
-  });
-
-  describe("hideAllById()", function() {
-    beforeEach(function() {
-      ['this', 'that', 'tother'].forEach(function(element) {
-        $('body').append('<div id="' + element + '"></div>');
-      });
-    });
-
-    afterEach(function() {
-      ['this', 'that', 'tother'].forEach(function(element) {
-        $('#' + element).remove();
-      });
-    });
-
-    it("hides all elements with the given ids", function() {
-      compaa.hideAllById(['this', 'that', 'tother']);
-
-      expect($('#this').css('display')).toEqual('none');
-      expect($('#that').css('display')).toEqual('none');
-      expect($('#tother').css('display')).toEqual('none');
     });
   });
 
   describe("show()", function() {
     beforeEach(function() {
       ['difference', 'animation', 'oldImage', 'newImage'].forEach(function(element) {
-        $('body').append('<div id="' + element + '"></div>');
+        $('body').append('<img id="' + element + '"></img>');
       });
     });
 
@@ -105,7 +76,6 @@ describe("Script", function() {
     it("gets artifacts json", function() {
       var callback = jasmine.createSpy();
 
-      compaa.compaaHost = 'http://localhost:4567';
       compaa.getDifferenceImages(callback);
 
       waitsFor(function() {
