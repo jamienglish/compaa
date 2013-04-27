@@ -1,16 +1,10 @@
-describe("Script", function() {
+describe("Compaa", function() {
   var compaa;
 
   beforeEach(function() {
     compaa = new Compaa();
     compaa.compaaHost = 'http://localhost:4567';
-    setupImages();
-    setupButtonsAndForm();
-  });
-
-  afterEach(function() {
-    tearDownImages();
-    tearDownButtonsAndForm();
+    loadFixtures('body.html');
   });
 
   describe("oldImagePath()", function() {
@@ -40,22 +34,10 @@ describe("Script", function() {
   });
 
   describe("show()", function() {
-    beforeEach(function() {
-      ['difference', 'animation', 'oldImage', 'newImage'].forEach(function(element) {
-        $('body').append('<img id="' + element + '"></img>');
-      });
-    });
-
-    afterEach(function() {
-      ['difference', 'animation', 'oldImage', 'newImage'].forEach(function(element) {
-        $('#' + element).remove();
-      });
-    });
-
     it("hides [difference animation oldImage newImage] elements and shows the given element", function() {
       compaa.show('difference');
 
-      expect($('#difference').css('display')).toEqual('block');
+      expect($('#difference').css('display')).toEqual('inline');
 
       expect($('#animation').css('display')).toEqual('none');
       expect($('#oldImage').css('display')).toEqual('none');
@@ -68,24 +50,30 @@ describe("Script", function() {
       expect($('#difference').css('display')).toEqual('none');
       expect($('#animation').css('display')).toEqual('none');
       expect($('#oldImage').css('display')).toEqual('none');
-      expect($('#newImage').css('display')).toEqual('block');
+      expect($('#newImage').css('display')).toEqual('inline');
     });
   });
 
-  describe("getDifferenceImages(callback)", function() {
-    it("gets artifacts json", function() {
-      var callback = jasmine.createSpy();
+  describe("init", function() {
+    it("sets click handlers for buttons", function() {
+      compaa.init();
+      $('#differenceButton').click();
+      expect($('#difference')).not.toBeHidden();
+      expect($('#animation')).toBeHidden();
+    });
 
-      compaa.getDifferenceImages(callback);
-
+    it("sets difference images", function() {
+      spyOn(compaa, 'setAnimationImage');
+      compaa.init();
       waitsFor(function() {
-        return callback.callCount > 0;
-      }, 'getDifferenceImages callback never got called', 1000);
-
+        return compaa.setAnimationImage.callCount > 0;
+      });
       runs(function() {
-        var differenceImages = callback.mostRecentCall.args[0];
-        expect(differenceImages.length).toEqual(3);
-        expect(differenceImages[0]).toEqual('artifacts/differences_in_screenshots_this_run/one.png_difference.gif');
+        expect(compaa.differenceImages).toEqual([
+          'artifacts/differences_in_screenshots_this_run/one.png_difference.gif',
+          'artifacts/differences_in_screenshots_this_run/two.png_difference.gif',
+          'artifacts/differences_in_screenshots_this_run/three.png_difference.gif'
+        ]);
       });
     });
   });

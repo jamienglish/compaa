@@ -4,6 +4,7 @@ require 'rake'
 require 'rake/testtask'
 require 'cucumber/rake/task'
 require 'jasmine'
+require 'jasmine-headless-webkit'
 load 'jasmine/tasks/jasmine.rake'
 
 Bundler::GemHelper.install_tasks
@@ -18,7 +19,13 @@ Rake::TestTask.new :integration do |t|
   t.pattern = 'spec/integration/*_spec.rb'
 end
 
-task :spec => [:units, :integration]
+Jasmine::Headless::Task.new('jasmine:headless') do |t|
+  t.colors = true
+  t.keep_on_error = true
+  #t.jasmine_config = 'this/is/the/path.yml'
+end
+
+task :spec => [:units, 'jasmine:headless', :integration]
 
 Cucumber::Rake::Task.new :features do |t|
   t.cucumber_opts = 'features --format pretty'

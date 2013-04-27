@@ -1,7 +1,7 @@
 src_files:
-  - spec/javascripts/support/spec_helper.js
   - lib/assets/underscore.js
   - lib/assets/jquery-2.0.0.js
+  - spec/javascripts/support/jasmine-jquery.js
   - lib/assets/compaa.js
 
 spec_files:

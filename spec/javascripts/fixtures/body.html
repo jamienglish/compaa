@@ -1,0 +1,17 @@
+<div id="fixture">
+  <canvas id='offScreenCanvas' style='position: absolute; left: -9999999px;'></canvas>
+  <canvas id='difference'></canvas>
+  <img id='animation' style='display: none'>
+  <img id='oldImage' style='display: none'>
+  <img id='newImage' style='display: none'>
+  <div id='buttonBar' style='width: 400px; margin: 0px auto'>
+    <button id='differenceButton'>Difference</button>
+    <button id='animationButton'>Animation</button>
+    <button id='oldImageButton'>Old Image</button>
+    <button id='newImageButton'>New Image</button>
+    <form action='/screenshots' class='artifacts' method='POST'>
+      <input id='filepath' name='filepath' type='hidden' value=''>
+      <input id='accept' type='submit' value='Accept'>
+    </form>
+  </div>
+</div>

@@ -36,12 +36,13 @@ module Compaa
 
       def get
         case @request.path
-        when '/'                then index
-        when '/underscore.js'   then underscore
-        when '/jquery-2.0.0.js' then jquery
-        when '/compaa.js'       then script
-        when '/artifacts.json'  then artifacts_json
-        else                         four_oh_four
+        when '/'                   then index
+        when '/underscore.js'      then underscore
+        when '/jquery-2.0.0.js'    then jquery
+        when '/context_blender.js' then context_blender
+        when '/compaa.js'          then script
+        when '/artifacts.json'     then artifacts_json
+        else                            four_oh_four
         end
       end
 
@@ -74,6 +75,12 @@ module Compaa
 
       def script
         js = File.read(File.expand_path('../assets/compaa.js', File.dirname(__FILE__)))
+
+        [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
+      end
+
+      def context_blender
+        js = File.read(File.expand_path('../assets/context_blender.js', File.dirname(__FILE__)))
 
         [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
       end
