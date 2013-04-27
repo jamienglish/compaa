@@ -18,10 +18,10 @@
   %img#newImage{style: 'display: none'}
 
   #buttonBar{style: 'width: 400px; margin: 0px auto'}
-    %button#differenceButton Difference
-    %button#animationButton Animation
-    %button#oldImageButton Old Image
-    %button#newImageButton New Image
+    %a#differenceButton{href: '#'} Difference
+    %a#animationButton{href: '#'} Animation
+    %a#oldImageButton{href: '#'} Old Image
+    %a#newImageButton{href: '#'} New Image
     %form{:class => 'artifacts', :method => 'POST', :action => '/screenshots'}
       %input#filepath{:name => 'filepath', :type => 'hidden', :value => ''}
       %input{:type => 'submit', :value => 'Accept', :id => 'accept'}
