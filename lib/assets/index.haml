@@ -4,6 +4,7 @@
   %script{src: '/jquery-2.0.0.js'}
   %script{src: '/context_blender.js'}
   %script{src: '/compaa.js'}
+  %link{rel: 'stylesheet', href: '/bootstrap.css'}
   :javascript
     $(function() {
       var compaa = new Compaa();
@@ -13,15 +14,16 @@
 %body
   %canvas#offScreenCanvas{style: 'position: absolute; left: -9999999px;'}
   %canvas#difference
+
   %img#animation{style: 'display: none'}
   %img#oldImage{style: 'display: none'}
   %img#newImage{style: 'display: none'}
 
-  #buttonBar{style: 'width: 400px; margin: 0px auto'}
-    %a#differenceButton{href: '#'} Difference
-    %a#animationButton{href: '#'} Animation
-    %a#oldImageButton{href: '#'} Old Image
-    %a#newImageButton{href: '#'} New Image
-    %form{:class => 'artifacts', :method => 'POST', :action => '/screenshots'}
-      %input#filepath{:name => 'filepath', :type => 'hidden', :value => ''}
-      %input{:type => 'submit', :value => 'Accept', :id => 'accept'}
+  %div{style: 'width: 400px; margin: 0px auto; text-align: center;'}
+    %p
+      %a.btn#differenceButton{href: '#'} Difference
+      %a.btn#animationButton{href: '#'} Animation
+      %a.btn#oldImageButton{href: '#'} Old Image
+      %a.btn#newImageButton{href: '#'} New Image
+    %p
+      %a#accept.btn.btn-primary{href: '#'} Accept

@@ -41,6 +41,7 @@ module Compaa
         when '/jquery-2.0.0.js'    then jquery
         when '/context_blender.js' then context_blender
         when '/compaa.js'          then script
+        when '/bootstrap.css'      then bootstrap
         when '/artifacts.json'     then artifacts_json
         else                            four_oh_four
         end
@@ -71,6 +72,12 @@ module Compaa
         else
           four_oh_four
         end
+      end
+
+      def bootstrap
+        css = File.read(File.expand_path('../assets/bootstrap.css', File.dirname(__FILE__)))
+
+        [ 200, { 'Content-Type' => 'text/css' }, [css] ]
       end
 
       def script
