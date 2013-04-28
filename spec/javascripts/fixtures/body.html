@@ -2,12 +2,12 @@
   <canvas id='offScreenCanvas' style='position: absolute; left: -9999999px;'></canvas>
   <canvas id='difference'></canvas>
   <img id='animation' style='display: none'>
-  <img id='oldImage' style='display: none'>
+  <img id='referenceImage' style='display: none'>
   <img id='newImage' style='display: none'>
   <div id='buttonBar' style='width: 400px; margin: 0px auto'>
     <a href='#' id='differenceButton'>Difference</a>
     <a href='#' id='animationButton'>Animation</a>
-    <a href='#' id='oldImageButton'>Old Image</a>
+    <a href='#' id='referenceImageButton'>Reference Image</a>
     <a href='#' id='newImageButton'>New Image</a>
     <form action='/screenshots' class='artifacts' method='POST'>
       <input id='filepath' name='filepath' type='hidden' value=''>
