@@ -15,16 +15,7 @@ describe "accepting screenshots from the browser" do
   end
 
   def assert_file_deleted(path)
-    timeout = 2
-    start_time = Time.now
-
-    begin
-      refute File.exists?(path),
-        'Difference image was not deleted'
-    rescue => e
-      retry if (Time.now - start_time) < timeout
-      raise
-    end
+    refute File.exists?(path), 'Difference image was not deleted'
   end
 
   it "Accepts via clicking accept" do
@@ -36,6 +27,7 @@ describe "accepting screenshots from the browser" do
         page.find('img#animation', visible: false)['src']
 
       click_link 'Accept'
+      sleep 0.1
 
       assert_file_deleted "#{homemove_dir}/step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png_difference.gif"
 
@@ -43,6 +35,7 @@ describe "accepting screenshots from the browser" do
         page.find('img#animation', visible: false)['src']
 
       click_link 'Accept'
+      sleep 0.1
 
       assert_file_deleted "#{homemove_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png_difference.gif"
 
@@ -50,6 +43,7 @@ describe "accepting screenshots from the browser" do
         page.find('img#animation', visible: false)['src']
 
       click_link 'Accept'
+      sleep 0.1
 
       assert_file_deleted "#{homemove_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1\.png_difference\.gif"
 
