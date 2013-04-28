@@ -18,6 +18,10 @@ describe "accepting screenshots from the browser" do
     refute File.exists?(path), 'Difference image was not deleted'
   end
 
+  def refute_file_deleted(path)
+    assert File.exists?(path), 'Difference image should not have been deleted but was'
+  end
+
   it "Accepts via clicking accept" do
     Dir.chdir 'tmp/homemove' do
       homemove_dir = 'artifacts/differences_in_screenshots_this_run/homemove'
@@ -34,10 +38,10 @@ describe "accepting screenshots from the browser" do
       assert_match %r{#{homemove_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1\.png_difference\.gif$},
         page.find('img#animation', visible: false)['src']
 
-      click_link 'Accept'
+      click_link 'Reject'
       sleep 0.1
 
-      assert_file_deleted "#{homemove_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png_difference.gif"
+      refute_file_deleted "#{homemove_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png_difference.gif"
 
       assert_match %r{#{homemove_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1\.png_difference\.gif$},
         page.find('img#animation', visible: false)['src']
