@@ -6,8 +6,9 @@
   %script{src: '/compaa.js'}
   %link{rel: 'stylesheet', href: '/bootstrap.css'}
   :javascript
+    var compaa;
     $(function() {
-      var compaa = new Compaa();
+      compaa = new Compaa();
       compaa.init();
     });
 
