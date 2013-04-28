@@ -7,50 +7,50 @@ describe("Compaa", function() {
     loadFixtures('body.html');
   });
 
-  describe("oldImagePath()", function() {
+  describe("referenceImagePath()", function() {
     it("changes the directory and filename of the differenceGifPath", function() {
-      var filepath, expectedOldImagePath;
+      var filepath, expectedReferenceImagePath;
 
-      filepath             = 'artifacts/differences_in_screenshots_this_run/firefox_home_move.png_difference.gif';
-      expectedOldImagePath = 'artifacts/reference_screenshots/firefox_home_move.png'
+      filepath = 'artifacts/differences_in_screenshots_this_run/firefox_home_move.png_difference.gif';
+      expectedReferenceImagePath = 'artifacts/reference_screenshots/firefox_home_move.png'
 
       spyOn(compaa, 'differenceGifPath').andReturn(filepath);
 
-      expect(compaa.oldImagePath()).toEqual(expectedOldImagePath);
+      expect(compaa.referenceImagePath()).toEqual(expectedReferenceImagePath);
     });
   });
 
-  describe("newImagePath()", function() {
+  describe("generatedImagePath()", function() {
     it("changes the directory to screenshots_generated_this_run and adds a png extension", function() {
-      var filepath, expectedNewImagePath;
+      var filepath, expectedGeneratedImagePath;
 
       filepath             = 'artifacts/differences_in_screenshots_this_run/firefox_home_move.png_difference.gif';
-      expectedNewImagePath = 'artifacts/screenshots_generated_this_run/firefox_home_move.png'
+      expectedGeneratedImagePath = 'artifacts/screenshots_generated_this_run/firefox_home_move.png'
 
       spyOn(compaa, 'differenceGifPath').andReturn(filepath);
 
-      expect(compaa.newImagePath()).toEqual(expectedNewImagePath);
+      expect(compaa.generatedImagePath()).toEqual(expectedGeneratedImagePath);
     });
   });
 
   describe("show()", function() {
-    it("hides [difference animation oldImage newImage] elements and shows the given element", function() {
+    it("hides [difference animation referenceImage generatedImage] elements and shows the given element", function() {
       compaa.show('difference');
 
       expect($('#difference').css('display')).toEqual('inline');
 
       expect($('#animation').css('display')).toEqual('none');
-      expect($('#oldImage').css('display')).toEqual('none');
-      expect($('#newImage').css('display')).toEqual('none');
+      expect($('#referenceImage').css('display')).toEqual('none');
+      expect($('#generatedImage').css('display')).toEqual('none');
     });
 
-    it("hides [difference animation oldImage newImage] elements and shows the given element", function() {
-      compaa.show('newImage');
+    it("hides [difference animation referenceImage generatedImage] elements and shows the given element", function() {
+      compaa.show('generatedImage');
 
       expect($('#difference').css('display')).toEqual('none');
       expect($('#animation').css('display')).toEqual('none');
-      expect($('#oldImage').css('display')).toEqual('none');
-      expect($('#newImage').css('display')).toEqual('inline');
+      expect($('#referenceImage').css('display')).toEqual('none');
+      expect($('#generatedImage').css('display')).toEqual('inline');
     });
   });
 
