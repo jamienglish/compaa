@@ -33,3 +33,13 @@ Cucumber::Rake::Task.new :features do |t|
 end
 
 task :default => [:spec, :features]
+
+task :demo do
+  require 'compaa'
+
+  FileUtils.cp_r('fixtures/homemove/artifacts', 'tmp/homemove/')
+
+  Dir.chdir('tmp/homemove') do
+    Rack::Server.start(:app => Compaa::RackApp.new, :Port => 3000)
+  end
+end
