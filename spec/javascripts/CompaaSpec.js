@@ -67,7 +67,7 @@ describe("Compaa", function() {
       compaa.init();
       waitsFor(function() {
         return compaa.setAnimationImage.callCount > 0;
-      });
+      }, 'setAnimationIMage didnt get called, is the mock is running??');
       runs(function() {
         expect(compaa.differenceImages).toEqual([
           'artifacts/differences_in_screenshots_this_run/one.png_difference.gif',
