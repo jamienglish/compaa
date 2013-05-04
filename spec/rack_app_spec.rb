@@ -32,9 +32,9 @@ module Compaa
         end
       end
 
-      describe '/compaa.js' do
+      describe '/assets/compaa.js' do
         it "returns our javascript" do
-          get '/compaa.js'
+          get '/assets/compaa.js'
           assert last_response.ok?
           assert_equal 'application/javascript', last_response.headers['Content-Type']
         end

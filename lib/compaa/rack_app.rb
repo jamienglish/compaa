@@ -12,6 +12,7 @@ module Compaa
       me = self
       Rack::Builder.new do
         use Rack::Static, :urls => ['/artifacts/'], :root => Dir.pwd
+        use Rack::Static, :urls => ['/assets'], :root => File.expand_path('..', File.dirname(__FILE__))
         run(me.new!)
       end
     end
@@ -36,14 +37,9 @@ module Compaa
 
       def get
         case @request.path
-        when '/'                   then index
-        when '/underscore.js'      then underscore
-        when '/jquery-2.0.0.js'    then jquery
-        when '/context_blender.js' then context_blender
-        when '/compaa.js'          then script
-        when '/bootstrap.css'      then bootstrap
-        when '/artifacts.json'     then artifacts_json
-        else                            four_oh_four
+        when '/'               then index
+        when '/artifacts.json' then artifacts_json
+        else                   four_oh_four
         end
       end
 
@@ -64,7 +60,9 @@ module Compaa
 
       def screenshots
         if @request.params.has_key?('filepath')
-          generated_image = GeneratedImage.new File.join(Dir.pwd, @request.params['filepath'])
+          path = File.join(Dir.pwd, @request.params['filepath'])
+          generated_image = GeneratedImage.new(path)
+
           generated_image.create_reference_image
           generated_image.delete_difference_image
 
@@ -74,36 +72,6 @@ module Compaa
         end
       end
 
-      def bootstrap
-        css = File.read(File.expand_path('../assets/bootstrap.css', File.dirname(__FILE__)))
-
-        [ 200, { 'Content-Type' => 'text/css' }, [css] ]
-      end
-
-      def script
-        js = File.read(File.expand_path('../assets/compaa.js', File.dirname(__FILE__)))
-
-        [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
-      end
-
-      def context_blender
-        js = File.read(File.expand_path('../assets/context_blender.js', File.dirname(__FILE__)))
-
-        [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
-      end
-
-      def jquery
-        js = File.read(File.expand_path('../assets/jquery-2.0.0.js', File.dirname(__FILE__)))
-
-        [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
-      end
-
-      def underscore
-        js = File.read(File.expand_path('../assets/underscore.js', File.dirname(__FILE__)))
-
-        [ 200, { 'Content-Type' => 'application/javascript' }, [js] ]
-      end
-
       def artifacts_json
         json = { difference_images: DifferenceImage.all.map(&:path) }.to_json
 
@@ -111,7 +79,7 @@ module Compaa
       end
 
       def four_oh_four
-        [ 404, {}, ['Not found'] ]
+        [ 404, { 'Content-Type' => 'text/plain' }, ['Not found'] ]
       end
     end
   end
