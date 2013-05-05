@@ -42,16 +42,22 @@ module Compaa
 
       describe '/artifacts' do
         it "serves artifacts JSON" do
-          image_paths = %w( one two three ).map { |name|
-            "artifacts/differences_in_screenshots_this_run/#{name}.png_difference.gif"
+          difference_image_paths = %w(
+            artifacts/differences_in_screenshots_this_run/one.png_difference.gif
+            artifacts/differences_in_screenshots_this_run/two.png_difference.gif
+            artifacts/differences_in_screenshots_this_run/three.png_difference.gif
+          )
+          expected_json = {
+            artifacts: {
+              differenceImages: difference_image_paths
+            }
           }
-          images        = image_paths.map { |path| DifferenceImage.new(path) }
-          expected_json = { difference_images: image_paths }
+          difference_images = difference_image_paths.map { |path| DifferenceImage.new(path) }
 
-          DifferenceImage.stub(:all, images) do
+          DifferenceImage.stub(:all, difference_images) do
             get '/artifacts.json'
             assert_equal 'application/json', last_response.content_type
-            assert_equal expected_json.to_json,      last_response.body
+            assert_equal expected_json.to_json, last_response.body
           end
         end
 
