@@ -2,7 +2,7 @@ describe("Compaa", function() {
   var compaa;
 
   beforeEach(function() {
-    compaa = new Compaa();
+    compaa = Object.create(Compaa);
     compaa.compaaHost = 'http://localhost:4567';
     loadFixtures('body.html');
   });
