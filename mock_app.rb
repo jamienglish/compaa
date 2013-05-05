@@ -12,12 +12,11 @@ end
 get '/artifacts.json' do
   content_type 'application/json'
   {
-    artifacts: {
-      differenceImages: [
-        'artifacts/differences_in_screenshots_this_run/one.png_difference.gif',
-        'artifacts/differences_in_screenshots_this_run/two.png_difference.gif',
-        'artifacts/differences_in_screenshots_this_run/three.png_difference.gif',
-      ]
-    }
+    artifacts: %w(
+      artifacts/reference_screenshots/one.png
+      artifacts/reference_screenshots/two.png
+      artifacts/reference_screenshots/three.png
+      artifacts/reference_screenshots/four.png
+    )
   }.to_json
 end

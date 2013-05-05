@@ -64,7 +64,9 @@ module Compaa
           generated_image = GeneratedImage.new(path)
 
           generated_image.create_reference_image
+
           generated_image.delete_difference_image
+          generated_image.delete
 
           [ 200, { 'Content-Type' => 'text/plain' }, ['Success'] ]
         else

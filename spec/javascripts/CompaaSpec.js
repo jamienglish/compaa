@@ -62,17 +62,18 @@ describe("Compaa", function() {
       expect($('#animation')).toBeHidden();
     });
 
-    it("sets difference images", function() {
-      spyOn(compaa, 'setAnimationImage');
+    it("sets reference images", function() {
+      spyOn(compaa, 'setArtifacts');
       compaa.init();
       waitsFor(function() {
-        return compaa.setAnimationImage.callCount > 0;
-      }, 'setAnimationImage didnt get called, is the mock is running??');
+        return compaa.setArtifacts.callCount > 0;
+      }, 'setArtifacts() didnt get called, is the mock is running??');
       runs(function() {
-        expect(compaa.differenceImages).toEqual([
-          'artifacts/differences_in_screenshots_this_run/one.png_difference.gif',
-          'artifacts/differences_in_screenshots_this_run/two.png_difference.gif',
-          'artifacts/differences_in_screenshots_this_run/three.png_difference.gif'
+        expect(compaa.artifacts).toEqual([
+          'artifacts/reference_screenshots/one.png',
+          'artifacts/reference_screenshots/two.png',
+          'artifacts/reference_screenshots/three.png',
+          'artifacts/reference_screenshots/four.png'
         ]);
       });
     });

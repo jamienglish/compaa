@@ -107,6 +107,9 @@ module Compaa
             refute File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
             post '/screenshots', :filepath => 'artifacts/screenshots_generated_this_run/file.png'
             assert File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
+
+            refute File.exists? "#{@tmp_dir}/artifacts/differences_in_screenshots_this_run/file.png_difference.gif"
+            refute File.exists? "#{@tmp_dir}/artifacts/screenshots_generated_this_run/file.png"
           end
         end
       end

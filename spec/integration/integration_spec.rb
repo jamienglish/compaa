@@ -57,8 +57,9 @@ describe "accepting screenshots from the browser" do
         page.find('img#generatedImage', visible: false)['src']
 
       click_link 'Accept'
-      sleep 0.1
+      sleep 0.5
 
+      assert File.exists? "artifacts/reference_screenshots/homemove/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png"
       assert_file_deleted "artifacts/screenshots_generated_this_run/homemove/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png"
 
       assert page.has_selector?('h1', text: 'Done!')
