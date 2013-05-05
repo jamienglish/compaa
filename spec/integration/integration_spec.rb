@@ -49,7 +49,15 @@ describe "accepting screenshots from the browser" do
       click_link 'Accept'
       sleep 0.1
 
-      assert_file_deleted "#{homemove_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1\.png_difference\.gif"
+      assert_file_deleted "#{homemove_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png_difference.gif"
+
+      assert_match %r{artifacts/screenshots_generated_this_run/homemove/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1\.png$},
+        page.find('img#generatedImage', visible: false)['src']
+
+      click_link 'Accept'
+      sleep 0.1
+
+      assert_file_deleted "artifacts/screenshots_generated_this_run/homemove/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png"
 
       assert page.has_selector?('h1', text: 'Done!')
     end
