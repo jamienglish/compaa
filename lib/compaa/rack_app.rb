@@ -75,7 +75,8 @@ module Compaa
       def artifacts_json
         json = {
           artifacts: {
-            differenceImages: DifferenceImage.all.map(&:path)
+            differenceImages: DifferenceImage.all.map(&:path),
+            generatedImages:  GeneratedImage.all.reject(&:has_reference_image?).map(&:path)
           }
         }.to_json
 

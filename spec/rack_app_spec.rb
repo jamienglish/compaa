@@ -47,17 +47,27 @@ module Compaa
             artifacts/differences_in_screenshots_this_run/two.png_difference.gif
             artifacts/differences_in_screenshots_this_run/three.png_difference.gif
           )
-          expected_json = {
-            artifacts: {
-              differenceImages: difference_image_paths
-            }
-          }
           difference_images = difference_image_paths.map { |path| DifferenceImage.new(path) }
 
+          first_generated = GeneratedImage.new('artifacts/screenshots_generated_this_run/one.png')
+          def first_generated.has_reference_image?; false; end
+
+          second_generated = GeneratedImage.new('artifacts/screenshots_generated_this_run/two.png')
+          def second_generated.has_reference_image?; true; end
+
+          expected_json = {
+            artifacts: {
+              differenceImages: difference_image_paths,
+              generatedImages: ['artifacts/screenshots_generated_this_run/one.png']
+            }
+          }.to_json
+
           DifferenceImage.stub(:all, difference_images) do
-            get '/artifacts.json'
-            assert_equal 'application/json', last_response.content_type
-            assert_equal expected_json.to_json, last_response.body
+            GeneratedImage.stub(:all, [first_generated, second_generated]) do
+              get '/artifacts.json'
+              assert_equal 'application/json', last_response.content_type
+              assert_equal expected_json, last_response.body
+            end
           end
         end
 
