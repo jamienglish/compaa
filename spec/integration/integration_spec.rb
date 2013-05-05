@@ -4,12 +4,10 @@ require 'capybara/poltergeist'
 Dir.chdir 'tmp/homemove' do
   Capybara.app = Compaa::RackApp.new
 end
-Capybara.default_driver = :poltergeist
+Capybara.current_driver = :selenium
 
 describe "accepting screenshots from the browser" do
   include Capybara::DSL
-
-  make_my_diffs_pretty!
 
   before do
     FileUtils.rm_rf('tmp/homemove')
