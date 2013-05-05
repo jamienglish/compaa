@@ -9,6 +9,8 @@ Capybara.default_driver = :poltergeist
 describe "accepting screenshots from the browser" do
   include Capybara::DSL
 
+  make_my_diffs_pretty!
+
   before do
     FileUtils.rm_rf('tmp/homemove')
     FileUtils.cp_r('fixtures/homemove', 'tmp/')
