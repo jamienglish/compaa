@@ -42,24 +42,25 @@ module Compaa
 
       describe '/artifacts' do
         it "serves artifacts JSON" do
-          difference_image_paths = %w(
-            artifacts/differences_in_screenshots_this_run/one.png_difference.gif
-            artifacts/differences_in_screenshots_this_run/two.png_difference.gif
-            artifacts/differences_in_screenshots_this_run/three.png_difference.gif
-          )
-          difference_images = difference_image_paths.map { |path| DifferenceImage.new(path) }
+          difference_images = [
+            DifferenceImage.new('artifacts/differences_in_screenshots_this_run/one.png_difference.gif'),
+            DifferenceImage.new('artifacts/differences_in_screenshots_this_run/two.png_difference.gif'),
+            DifferenceImage.new('artifacts/differences_in_screenshots_this_run/three.png_difference.gif'),
+          ]
 
-          first_generated = GeneratedImage.new('artifacts/screenshots_generated_this_run/one.png')
+          first_generated = GeneratedImage.new('artifacts/screenshots_generated_this_run/four.png')
           def first_generated.has_reference_image?; false; end
 
-          second_generated = GeneratedImage.new('artifacts/screenshots_generated_this_run/two.png')
+          second_generated = GeneratedImage.new('artifacts/screenshots_generated_this_run/five.png')
           def second_generated.has_reference_image?; true; end
 
           expected_json = {
-            artifacts: {
-              differenceImages: difference_image_paths,
-              generatedImages: ['artifacts/screenshots_generated_this_run/one.png']
-            }
+            artifacts: %w(
+              artifacts/reference_screenshots/one.png
+              artifacts/reference_screenshots/two.png
+              artifacts/reference_screenshots/three.png
+              artifacts/reference_screenshots/four.png
+            )
           }.to_json
 
           DifferenceImage.stub(:all, difference_images) do

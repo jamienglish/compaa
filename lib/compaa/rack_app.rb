@@ -73,11 +73,11 @@ module Compaa
       end
 
       def artifacts_json
+        difference_images = DifferenceImage.all.map(&:reference_path)
+        generated_images  = GeneratedImage.all.reject(&:has_reference_image?).map(&:reference_path)
+
         json = {
-          artifacts: {
-            differenceImages: DifferenceImage.all.map(&:path),
-            generatedImages:  GeneratedImage.all.reject(&:has_reference_image?).map(&:path)
-          }
+          artifacts: difference_images + generated_images
         }.to_json
 
         [ 200, { 'Content-Type' => 'application/json' }, [json] ]
