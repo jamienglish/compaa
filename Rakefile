@@ -42,4 +42,6 @@ task :demo do
   Dir.chdir('tmp/homemove') do
     Rack::Server.start(:app => Compaa::RackApp.new, :Port => 3000)
   end
+
+  FileUtils.rm_rf('tmp/homemove/artifacts')
 end
