@@ -1,5 +1,3 @@
-lib = File.expand_path 'lib', File.dirname(__FILE__)
-$LOAD_PATH.unshift lib unless $LOAD_PATH.include? lib
 require 'compaa/version'
 
 Gem::Specification.new do |gem|
@@ -18,20 +16,18 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  %w( rake aruba simplecov wrong minitest guard-minitest guard-cucumber
-      rack-test capybara poltergeist jasmine jasmine-headless-webkit sinatra rack-cors pry pry-debugger).each do |lib|
-    gem.add_development_dependency lib
-  end
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'simplecov'
+  gem.add_development_dependency 'minitest'
+  gem.add_development_dependency 'rack-test'
+  gem.add_development_dependency 'capybara'
+  gem.add_development_dependency 'jasmine'
+  gem.add_development_dependency 'jasmine-headless-webkit'
+  gem.add_development_dependency 'sinatra'
+  gem.add_development_dependency 'rack-cors'
+  gem.add_development_dependency 'pry'
+  gem.add_development_dependency 'pry-debugger'
 
-  gem.add_development_dependency 'rb-inotify' if RUBY_PLATFORM =~ /linux/
-
-  if RUBY_PLATFORM =~ /darwin/
-    gem.add_development_dependency 'rb-fsevent'
-    gem.add_development_dependency 'terminal-notifier-guard'
-  end
-
-  gem.add_dependency 'methadone', '~> 1.2.2'
   gem.add_dependency 'haml'
-  gem.add_dependency 'watir-webdriver'
   gem.add_dependency 'rack'
 end
