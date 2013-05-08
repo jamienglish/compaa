@@ -1,5 +1,4 @@
 src_files:
-  - lib/assets/underscore.js
   - lib/assets/jquery-2.0.0.js
   - spec/javascripts/support/jasmine-jquery.js
   - spec/javascripts/support/bind.js
