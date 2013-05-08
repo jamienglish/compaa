@@ -7,29 +7,29 @@ describe("Compaa", function() {
     loadFixtures('body.html');
   });
 
-  describe("referenceImagePath()", function() {
-    it("changes the directory and filename of the differenceGifPath", function() {
-      var filepath, expectedReferenceImagePath;
+  describe("generatedImagePath()", function() {
+    it("changes the directory and filename of the referenceImagePath", function() {
+      var referencePath, expectedGeneratedImagePath;
 
-      filepath = 'artifacts/differences_in_screenshots_this_run/firefox_home_move.png_difference.gif';
-      expectedReferenceImagePath = 'artifacts/reference_screenshots/firefox_home_move.png'
+      referencePath = 'artifacts/reference_screenshots/firefox_home_move.png'
+      expectedGeneratedImagePath = 'artifacts/screenshots_generated_this_run/firefox_home_move.png';
 
-      spyOn(compaa, 'differenceGifPath').andReturn(filepath);
+      spyOn(compaa, 'referenceImagePath').andReturn(referencePath);
 
-      expect(compaa.referenceImagePath()).toEqual(expectedReferenceImagePath);
+      expect(compaa.generatedImagePath()).toEqual(expectedGeneratedImagePath);
     });
   });
 
-  describe("generatedImagePath()", function() {
+  describe("differenceGifPath()", function() {
     it("changes the directory to screenshots_generated_this_run and adds a png extension", function() {
-      var filepath, expectedGeneratedImagePath;
+      var referenceImagePath, expectedDifferenceGifPath;
 
-      filepath             = 'artifacts/differences_in_screenshots_this_run/firefox_home_move.png_difference.gif';
-      expectedGeneratedImagePath = 'artifacts/screenshots_generated_this_run/firefox_home_move.png'
+      expectedDifferenceGifPath = 'artifacts/differences_in_screenshots_this_run/firefox_home_move.png_difference.gif';
+      referenceImagePath = 'artifacts/reference_screenshots/firefox_home_move.png'
 
-      spyOn(compaa, 'differenceGifPath').andReturn(filepath);
+      spyOn(compaa, 'referenceImagePath').andReturn(referenceImagePath);
 
-      expect(compaa.generatedImagePath()).toEqual(expectedGeneratedImagePath);
+      expect(compaa.differenceGifPath()).toEqual(expectedDifferenceGifPath);
     });
   });
 
@@ -63,7 +63,7 @@ describe("Compaa", function() {
     });
 
     it("sets reference images", function() {
-      spyOn(compaa, 'setArtifacts');
+      spyOn(compaa, 'setArtifacts').andCallThrough();
       compaa.init();
       waitsFor(function() {
         return compaa.setArtifacts.callCount > 0;
