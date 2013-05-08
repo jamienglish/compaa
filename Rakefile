@@ -2,7 +2,6 @@ require 'bundler'
 
 require 'rake'
 require 'rake/testtask'
-require 'cucumber/rake/task'
 require 'jasmine'
 require 'jasmine-headless-webkit'
 load 'jasmine/tasks/jasmine.rake'
@@ -28,11 +27,7 @@ end
 
 task :spec => ['spec:units', 'spec:js', 'spec:integration']
 
-Cucumber::Rake::Task.new :features do |t|
-  t.cucumber_opts = 'features --format pretty'
-end
-
-task :default => [:spec, :features]
+task :default => [:spec]
 
 task :demo do
   require 'compaa'
