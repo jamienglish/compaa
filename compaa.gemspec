@@ -1,3 +1,4 @@
+$:.push File.expand_path('../lib', __FILE__)
 require 'compaa/version'
 
 Gem::Specification.new do |gem|
@@ -30,4 +31,5 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'haml'
   gem.add_dependency 'rack'
+  gem.add_dependency 'launchy'
 end
