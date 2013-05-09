@@ -2,5 +2,11 @@
 
 require 'compaa'
 require 'rack'
+require 'launchy'
+
+Thread.new do
+  sleep 0.25
+  Launchy.open('http://localhost:7788')
+end
 
 Rack::Server.start(:app => Compaa::RackApp.new, :Port => 7788)
