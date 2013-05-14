@@ -63,11 +63,10 @@ describe("Compaa", function() {
     });
 
     it("sets reference images", function() {
-      spyOn(compaa, 'setArtifacts').andCallThrough();
       compaa.init();
       waitsFor(function() {
-        return compaa.setArtifacts.callCount > 0;
-      }, 'setArtifacts() didnt get called, is the mock is running??');
+        return compaa.artifacts;
+      }, "artifacts hasn't been set, is the mock is running??");
       runs(function() {
         expect(compaa.artifacts).toEqual([
           'artifacts/reference_screenshots/one.png',
