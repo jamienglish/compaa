@@ -32,4 +32,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'haml'
   gem.add_dependency 'rack'
   gem.add_dependency 'launchy'
+  gem.add_dependency 'coffee-script'
 end

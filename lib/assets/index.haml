@@ -1,13 +1,13 @@
 !!!
 %head
-  %script{src: '/assets/compaa.js'}
+  %script{src: '/compaa.js'}
   %link{rel: 'stylesheet', href: '/assets/bootstrap.css'}
   :javascript
     var compaa;
-    $(function() {
+    document.addEventListener('DOMContentLoaded', function() {
       compaa = Object.create(Compaa);
       compaa.init();
-    });
+    }, false);
 
 %body
   %canvas#difference

@@ -1,6 +1,7 @@
 require 'rack'
 require 'haml'
 require 'json'
+require 'coffee-script'
 
 module Compaa
   class RackApp
@@ -39,6 +40,7 @@ module Compaa
         case @request.path
         when '/'               then index
         when '/artifacts.json' then artifacts_json
+        when '/compaa.js'      then compaa_js
         else                   four_oh_four
         end
       end
@@ -56,6 +58,13 @@ module Compaa
         body = Haml::Engine.new(template).render
 
         [ 200, { 'Content-Type' => 'text/html' }, [body] ]
+      end
+
+      def compaa_js
+        path = File.expand_path('../assets/compaa.coffee', File.dirname(__FILE__))
+        body = CoffeeScript.compile(File.read(path))
+
+        [ 200, { 'Content-Type' => 'application/javascript' }, [body] ]
       end
 
       def screenshots
