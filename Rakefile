@@ -8,6 +8,10 @@ load 'jasmine/tasks/jasmine.rake'
 
 Bundler::GemHelper.install_tasks
 
+task :start_mock do
+  require_relative 'mock_app'
+end
+
 namespace :spec do
   Rake::TestTask.new :units do |t|
     t.libs   << 'spec'
@@ -23,11 +27,15 @@ namespace :spec do
     t.colors = true
     t.keep_on_error = true
   end
+
+  task :js => :start_mock
 end
 
-task :spec => ['spec:units', 'spec:js', 'spec:integration']
+task 'jasmine:require' => :start_mock
 
-task :default => [:spec]
+task :spec => ['spec:units', 'jasmine:ci', 'spec:integration']
+
+task :default => :spec
 
 task :demo do
   require 'compaa'
