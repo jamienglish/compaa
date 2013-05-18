@@ -38,10 +38,11 @@ module Compaa
 
       def get
         case @request.path
-        when '/'               then index
-        when '/artifacts.json' then artifacts_json
-        when '/compaa.js'      then compaa_js
-        else                   four_oh_four
+        when '/'                   then index
+        when '/artifacts.json'     then artifacts_json
+        when '/compaa.js'          then compaa_js
+        when '/context_blender.js' then context_blender_js
+        else                            four_oh_four
         end
       end
 
@@ -62,6 +63,13 @@ module Compaa
 
       def compaa_js
         path = File.expand_path('../assets/compaa.coffee', File.dirname(__FILE__))
+        body = CoffeeScript.compile(File.read(path))
+
+        [ 200, { 'Content-Type' => 'application/javascript' }, [body] ]
+      end
+
+      def context_blender_js
+        path = File.expand_path('../assets/context_blender.coffee', File.dirname(__FILE__))
         body = CoffeeScript.compile(File.read(path))
 
         [ 200, { 'Content-Type' => 'application/javascript' }, [body] ]

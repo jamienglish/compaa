@@ -1,6 +1,7 @@
 imageTypes = ['difference', 'animation', 'referenceImage', 'generatedImage']
 compaaHost = ''
 artifacts  = ''
+supportsBlending = window.navigator.userAgent.indexOf('Firefox/2') isnt -1
 
 init = ->
   attachClickHandlers()
@@ -39,9 +40,6 @@ attachButtonClickHandlers = ->
       evt.preventDefault()
       show(element)
 
-supportsBlending = ->
-  window.navigator.userAgent.indexOf('Firefox/2') isnt -1
-
 makeItBlend = ->
   generatedImage = new Image()
   referenceImage = new Image()
@@ -65,15 +63,32 @@ setBlenderWidth = (referenceImage) ->
   document.getElementById('difference').height = referenceImage.height
 
 drawCanvas = (referenceImage, generatedImage) ->
-  context = document.getElementById('difference').getContext('2d')
-
-  if supportsBlending()
-    context.globalCompositeOperation = 'difference'
+  if supportsBlending
+    blendForRealz(referenceImage, generatedImage)
   else
-    context.globalAlpha = 0.5
+    blendFallback(referenceImage, generatedImage)
 
+blendForRealz = (referenceImage, generatedImage) ->
+  context = document.getElementById('difference').getContext('2d')
+  context.globalCompositeOperation = 'difference'
   context.drawImage(referenceImage, 0, 0)
   context.drawImage(generatedImage, 0, 0)
+
+blendFallback = (referenceImage, generatedImage) ->
+  canvas = document.createElement('canvas')
+  canvas.width = generatedImage.width
+  canvas.height = generatedImage.height
+
+  over = canvas.getContext('2d')
+  under = document.getElementById('difference').getContext('2d')
+
+  over.clearRect(0, 0, over.canvas.width, over.canvas.height);
+  under.clearRect(0, 0, under.canvas.width, under.canvas.height);
+
+  over.drawImage(referenceImage, 0, 0);
+  under.drawImage(generatedImage, 0, 0);
+
+  over.blendOnto(under, 'difference');
 
 acceptImage = ->
   url = compaaHost + '/screenshots?filepath=' + generatedImagePath()
