@@ -7,7 +7,7 @@ init = ->
   attachClickHandlers()
   storeArtifacts ->
     paintThePicture()
-    show('generatedImage')
+    show('difference')
 
 storeArtifacts = (callback) ->
   xhr = new XMLHttpRequest()
