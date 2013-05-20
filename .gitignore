@@ -6,3 +6,4 @@ Gemfile.lock
 coverage
 tags
 tmp
+spec/javascripts/compiled

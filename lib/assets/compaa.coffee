@@ -135,4 +135,8 @@ currentArtifact = ->
 endGame = ->
   document.body.innerHTML = '<h1>Done!</h1>'
 
-@Compaa = { init: init }
+@Compaa =
+	init: init
+	referenceImagePath: referenceImagePath
+	generatedImagePath: generatedImagePath
+	differenceGifPath: differenceGifPath

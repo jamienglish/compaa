@@ -1,8 +1,7 @@
 src_files:
-  - lib/assets/jquery-2.0.0.js
-  - spec/javascripts/support/jasmine-jquery.js
   - spec/javascripts/support/bind.js
-  - lib/assets/compaa.js
+  - lib/assets/context_blender.coffee
+  - lib/assets/compaa.coffee
 
 spec_files:
-  - '**CompaaSpec.js'
+  - "**/*[Ss]pec.{coffee}"
