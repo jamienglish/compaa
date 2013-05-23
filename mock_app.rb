@@ -17,11 +17,11 @@ class MockCompaa < Sinatra::Base
     content_type 'application/json'
     {
       artifacts: %w(
-      artifacts/reference_screenshots/one.png
-      artifacts/reference_screenshots/two.png
-      artifacts/reference_screenshots/three.png
-      artifacts/reference_screenshots/four.png
-    )
+        artifacts/reference_screenshots/one.png
+        artifacts/reference_screenshots/two.png
+        artifacts/reference_screenshots/three.png
+        artifacts/reference_screenshots/four.png
+      )
     }.to_json
   end
 end

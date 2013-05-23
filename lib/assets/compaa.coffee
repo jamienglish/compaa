@@ -1,7 +1,6 @@
 imageTypes = ['difference', 'animation', 'referenceImage', 'generatedImage']
 compaaHost = ''
 artifacts  = ''
-supportsBlending = window.navigator.userAgent.indexOf('Firefox/2') isnt -1
 
 init = ->
   attachClickHandlers()
@@ -23,7 +22,7 @@ attachClickHandlers = ->
   attachRejectClickHandler()
 
 paintThePicture = ->
-  makeItBlend()
+  @blender.makeItBlend(generatedImagePath(), referenceImagePath())
   setDifferenceImage()
   setGeneratedImage()
   setReferenceImage()
@@ -39,56 +38,6 @@ attachButtonClickHandlers = ->
     document.getElementById(element + 'Button').onclick = (evt) ->
       evt.preventDefault()
       show(element)
-
-makeItBlend = ->
-  generatedImage = new Image()
-  referenceImage = new Image()
-
-  [referenceImage, generatedImage].forEach (image) ->
-    image.onerror = ->
-      document.getElementById('difference').width = 0
-      document.getElementById('difference').height = 0
-
-  referenceImage.onload = ->
-    generatedImage.onload = ->
-      setBlenderWidth(referenceImage)
-      drawCanvas(referenceImage, generatedImage)
-
-    generatedImage.src = generatedImagePath()
-
-  referenceImage.src = referenceImagePath()
-
-setBlenderWidth = (referenceImage) ->
-  document.getElementById('difference').width  = referenceImage.width
-  document.getElementById('difference').height = referenceImage.height
-
-drawCanvas = (referenceImage, generatedImage) ->
-  if supportsBlending
-    blendForRealz(referenceImage, generatedImage)
-  else
-    blendFallback(referenceImage, generatedImage)
-
-blendForRealz = (referenceImage, generatedImage) ->
-  context = document.getElementById('difference').getContext('2d')
-  context.globalCompositeOperation = 'difference'
-  context.drawImage(referenceImage, 0, 0)
-  context.drawImage(generatedImage, 0, 0)
-
-blendFallback = (referenceImage, generatedImage) ->
-  canvas = document.createElement('canvas')
-  canvas.width = generatedImage.width
-  canvas.height = generatedImage.height
-
-  over = canvas.getContext('2d')
-  under = document.getElementById('difference').getContext('2d')
-
-  over.clearRect(0, 0, over.canvas.width, over.canvas.height);
-  under.clearRect(0, 0, under.canvas.width, under.canvas.height);
-
-  over.drawImage(referenceImage, 0, 0);
-  under.drawImage(generatedImage, 0, 0);
-
-  over.blendOnto(under, 'difference');
 
 acceptImage = ->
   url = compaaHost + '/screenshots?filepath=' + generatedImagePath()
@@ -135,8 +84,4 @@ currentArtifact = ->
 endGame = ->
   document.body.innerHTML = '<h1>Done!</h1>'
 
-@Compaa =
-	init: init
-	referenceImagePath: referenceImagePath
-	generatedImagePath: generatedImagePath
-	differenceGifPath: differenceGifPath
+@Compaa = { init: init }

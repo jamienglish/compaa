@@ -1,29 +1,29 @@
 loadFixture = ->
-  document.body.innerHTML = document.body.innerHTML + """
-  <div id='fixture'>
-    <canvas id='offScreenCanvas' style='position: absolute; left: -9999999px;'></canvas>
-    <canvas id='difference'></canvas>
-    <img id='animation' style='display: none'>
-    <img id='referenceImage' style='display: none'>
-    <img id='generatedImage' style='display: none'>
-    <div style='width: 500px; margin: 0px auto; text-align: center;'>
-      <p>
-        <a class='btn' href='#' id='differenceButton'>Difference</a>
-        <a class='btn' href='#' id='animationButton'>Animation</a>
-        <a class='btn' href='#' id='referenceImageButton'>Reference Image</a>
-        <a class='btn' href='#' id='generatedImageButton'>Generated Image</a>
-      </p>
-      <p>
-        <a class='btn btn-primary' href='#' id='accept'>Accept</a>
-        <a class='btn btn-danger' href='#' id='reject'>Reject</a>
-      </p>
+  html = """
+    <div id='fixture'>
+      <canvas id='offScreenCanvas' style='position: absolute; left: -9999999px;'></canvas>
+      <canvas id='difference'></canvas>
+      <img id='animation' style='display: none'>
+      <img id='referenceImage' style='display: none'>
+      <img id='generatedImage' style='display: none'>
+      <div style='width: 500px; margin: 0px auto; text-align: center;'>
+        <p>
+          <a class='btn' href='#' id='differenceButton'>Difference</a>
+          <a class='btn' href='#' id='animationButton'>Animation</a>
+          <a class='btn' href='#' id='referenceImageButton'>Reference Image</a>
+          <a class='btn' href='#' id='generatedImageButton'>Generated Image</a>
+        </p>
+        <p>
+          <a class='btn btn-primary' href='#' id='accept'>Accept</a>
+          <a class='btn btn-danger' href='#' id='reject'>Reject</a>
+        </p>
+      </div>
     </div>
-  </div>
   """
+  document.body.innerHTML = document.body.innerHTML + html
 
 removeFixture = ->
-  fixture = document.getElementById('fixture')
-  document.body.removeChild(fixture)
+  document.body.removeChild(document.getElementById('fixture'))
 
 describe "Compaa", ->
   compaa = undefined
@@ -47,7 +47,6 @@ describe "Compaa", ->
       spyOn(compaa, "referenceImagePath").andReturn referenceImagePath
       expect(compaa.differenceGifPath()).toEqual expectedDifferenceGifPath
 
-
   describe "show()", ->
     it "hides [difference animation referenceImage generatedImage] elements and shows the given element", ->
       compaa.show "difference"
@@ -62,7 +61,6 @@ describe "Compaa", ->
       expect($("#animation").css("display")).toEqual "none"
       expect($("#referenceImage").css("display")).toEqual "none"
       expect($("#generatedImage").css("display")).toEqual "inline"
-
 
   describe "init", ->
     it "sets click handlers for buttons", ->
