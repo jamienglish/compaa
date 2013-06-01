@@ -1,7 +1,9 @@
 src_files:
   - spec/javascripts/support/bind.js
-  - lib/assets/context_blender.coffee
-  - lib/assets/compaa.coffee
+  - spec/javascripts/support/imagediff.js
+  - lib/assets/context_blender.js
+  - lib/assets/blender.js
+  - lib/assets/compaa.js
 
 spec_files:
-  - "**/*[Ss]pec.{coffee}"
+  - "**/*[Ss]pec.{js}"

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'capybara/poltergeist'
+require 'capybara'
 
 Dir.chdir 'tmp/homemove' do
   Capybara.app = Compaa::RackApp.new

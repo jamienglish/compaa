@@ -1,7 +1,6 @@
 require 'rack'
 require 'haml'
 require 'json'
-require 'coffee-script'
 
 module Compaa
   class RackApp
@@ -60,27 +59,6 @@ module Compaa
         body = Haml::Engine.new(template).render
 
         [ 200, { 'Content-Type' => 'text/html' }, [body] ]
-      end
-
-      def compaa_js
-        path = File.expand_path('../assets/compaa.coffee', File.dirname(__FILE__))
-        body = CoffeeScript.compile(File.read(path))
-
-        [ 200, { 'Content-Type' => 'application/javascript' }, [body] ]
-      end
-
-      def blender_js
-        path = File.expand_path('../assets/blender.coffee', File.dirname(__FILE__))
-        body = CoffeeScript.compile(File.read(path))
-
-        [ 200, { 'Content-Type' => 'application/javascript' }, [body] ]
-      end
-
-      def context_blender_js
-        path = File.expand_path('../assets/context_blender.coffee', File.dirname(__FILE__))
-        body = CoffeeScript.compile(File.read(path))
-
-        [ 200, { 'Content-Type' => 'application/javascript' }, [body] ]
       end
 
       def screenshots
