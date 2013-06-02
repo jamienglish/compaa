@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe Compaa::GeneratedImage do
-  attr_reader :mock_file_manager, :path, :ref_image, :subject
+  attr_reader :mock_file_manager, :path, :subject
 
   before do
     @mock_file_manager = MiniTest::Mock.new
     @path      = File.join %w[artifacts screenshots_generated_this_run dir file.png]
-    @ref_image = File.join %w[artifacts reference_screenshots dir file.png]
     @subject   = Compaa::GeneratedImage.new @path
   end
 
@@ -20,28 +19,6 @@ describe Compaa::GeneratedImage do
       Dir.stub :glob, file_list do
         Compaa::GeneratedImage.all.map(&:path).must_equal file_list
       end
-    end
-  end
-
-  describe :has_reference_image? do
-    it "is true when a corresponding reference image exists" do
-      subject.file_manager = mock_file_manager
-
-      File.stub :exists?, true do
-        assert subject.has_reference_image?
-      end
-
-      mock_file_manager.verify
-    end
-
-    it "is false when a corresponding reference image does not exist" do
-      subject.file_manager = mock_file_manager
-
-      File.stub :exists?, false do
-        refute subject.has_reference_image?
-      end
-
-      mock_file_manager.verify
     end
   end
 
@@ -64,17 +41,5 @@ describe Compaa::GeneratedImage do
       File.join %w[artifacts reference_screenshots dir file.png]
 
     subject.reference_path.must_equal reference_path
-  end
-
-  it "deletes its corresponding difference image" do
-    subject.file_manager = mock_file_manager
-    difference_path =
-      File.join %w[artifacts differences_in_screenshots_this_run dir file.png_difference.gif]
-
-    mock_file_manager.expect :rm, true, [difference_path, { force: true }]
-
-    subject.delete_difference_image
-
-    mock_file_manager.verify
   end
 end

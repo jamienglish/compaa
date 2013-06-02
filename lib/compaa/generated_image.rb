@@ -10,22 +10,16 @@ module Compaa
       }
     end
 
+		def to_s
+			path
+		end
+
     def create_reference_image
       copy_and_create_directory reference_path
     end
 
-    def has_reference_image?
-      File.exists? reference_path
-    end
-
     def reference_path
       path.gsub 'screenshots_generated_this_run', 'reference_screenshots'
-    end
-
-    def delete_difference_image
-      difference_image_path = path.gsub 'screenshots_generated_this_run', 'differences_in_screenshots_this_run'
-      difference_image_path << '_difference.gif'
-      file_manager.rm difference_image_path, force: true
     end
 
     def delete

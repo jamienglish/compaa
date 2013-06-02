@@ -67,8 +67,6 @@ module Compaa
           generated_image = GeneratedImage.new(path)
 
           generated_image.create_reference_image
-
-          generated_image.delete_difference_image
           generated_image.delete
 
           [ 200, { 'Content-Type' => 'text/plain' }, ['Success'] ]
@@ -78,12 +76,7 @@ module Compaa
       end
 
       def artifacts_json
-        difference_images = DifferenceImage.all.map(&:reference_path)
-        generated_images  = GeneratedImage.all.reject(&:has_reference_image?).map(&:reference_path)
-
-        json = {
-          artifacts: difference_images + generated_images
-        }.to_json
+        json = { artifacts: GeneratedImage.all }.to_json
 
         [ 200, { 'Content-Type' => 'application/json' }, [json] ]
       end

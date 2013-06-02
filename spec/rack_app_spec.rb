@@ -42,33 +42,20 @@ module Compaa
 
       describe '/artifacts' do
         it "serves artifacts JSON" do
-          difference_images = [
-            DifferenceImage.new('artifacts/differences_in_screenshots_this_run/one.png_difference.gif'),
-            DifferenceImage.new('artifacts/differences_in_screenshots_this_run/two.png_difference.gif'),
-            DifferenceImage.new('artifacts/differences_in_screenshots_this_run/three.png_difference.gif'),
-          ]
-
-          first_generated = GeneratedImage.new('artifacts/screenshots_generated_this_run/four.png')
-          def first_generated.has_reference_image?; false; end
-
-          second_generated = GeneratedImage.new('artifacts/screenshots_generated_this_run/five.png')
-          def second_generated.has_reference_image?; true; end
+          first_generated  = GeneratedImage.new('artifacts/screenshots_generated_this_run/one.png')
+          second_generated = GeneratedImage.new('artifacts/screenshots_generated_this_run/two.png')
 
           expected_json = {
             artifacts: %w(
-              artifacts/reference_screenshots/one.png
-              artifacts/reference_screenshots/two.png
-              artifacts/reference_screenshots/three.png
-              artifacts/reference_screenshots/four.png
+              artifacts/screenshots_generated_this_run/one.png
+              artifacts/screenshots_generated_this_run/two.png
             )
           }.to_json
 
-          DifferenceImage.stub(:all, difference_images) do
-            GeneratedImage.stub(:all, [first_generated, second_generated]) do
-              get '/artifacts.json'
-              assert_equal 'application/json', last_response.content_type
-              assert_equal expected_json, last_response.body
-            end
+          GeneratedImage.stub(:all, [first_generated, second_generated]) do
+            get '/artifacts.json'
+            assert_equal 'application/json', last_response.content_type
+            assert_equal expected_json, last_response.body
           end
         end
 
@@ -102,13 +89,11 @@ module Compaa
         it "copies the supplied image path to its reference image" do
           Dir.stub(:pwd, @tmp_dir) do
             touch_file 'artifacts/screenshots_generated_this_run/file.png'
-            touch_file 'artifacts/differences_in_screenshots_this_run/file.png_difference.gif'
 
             refute File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
             post '/screenshots', :filepath => 'artifacts/screenshots_generated_this_run/file.png'
             assert File.exists? "#{@tmp_dir}/artifacts/reference_screenshots/file.png"
 
-            refute File.exists? "#{@tmp_dir}/artifacts/differences_in_screenshots_this_run/file.png_difference.gif"
             refute File.exists? "#{@tmp_dir}/artifacts/screenshots_generated_this_run/file.png"
           end
         end
