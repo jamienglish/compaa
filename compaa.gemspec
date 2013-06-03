@@ -28,6 +28,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rack-cors'
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'pry-debugger'
+  gem.add_development_dependency 'thin'
 
   gem.add_dependency 'haml'
   gem.add_dependency 'rack'
