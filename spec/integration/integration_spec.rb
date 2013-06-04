@@ -22,43 +22,66 @@ describe "accepting screenshots from the browser" do
     assert File.exists?(path), 'Difference image should not have been deleted but was'
   end
 
+  def assert_same_file(path1, path2)
+    assert FileUtils.compare_file(path1, path2)
+  end
+
+  def refute_same_file(path1, path2)
+    refute FileUtils.compare_file(path1, path2)
+  end
+
   it "Accepts via clicking accept" do
     Dir.chdir 'tmp/homemove' do
-      homemove_dir = 'artifacts/differences_in_screenshots_this_run/homemove'
+      reference_dir = 'artifacts/reference_screenshots/homemove'
+      generated_dir = 'artifacts/screenshots_generated_this_run/homemove'
+
       visit '/'
 
-      assert_match %r{#{homemove_dir}/step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1\.png_difference\.gif$},
-        page.find('img#animation', visible: false)['src']
+      sleep 1
+
+      generated_image = "#{generated_dir}/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png"
+      reference_image = "#{reference_dir}/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png"
+
+      assert_match /#{Regexp.escape(generated_image)}$/, page.find('img#generatedImage')['src']
 
       click_link 'Accept'
       sleep 0.1
 
-      assert_file_deleted "#{homemove_dir}/step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png_difference.gif"
+      assert_file_deleted generated_image
 
-      assert_match %r{#{homemove_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1\.png_difference\.gif$},
-        page.find('img#animation', visible: false)['src']
+      generated_image = "#{generated_dir}/step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png"
+      reference_image = "#{reference_dir}/step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png"
+
+      assert_match /#{Regexp.escape(generated_image)}$/, page.find('img#generatedImage', visible: false)['src']
+      assert_match /#{Regexp.escape(reference_image)}$/, page.find('img#referenceImage', visible: false)['src']
 
       click_link 'Reject'
       sleep 0.1
 
-      refute_file_deleted "#{homemove_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png_difference.gif"
+      refute_file_deleted generated_image
+      refute_same_file reference_image, generated_image
 
-      assert_match %r{#{homemove_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1\.png_difference\.gif$},
-        page.find('img#animation', visible: false)['src']
+      generated_image = "#{generated_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png"
+      reference_image = "#{reference_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png"
+
+      assert_match /#{Regexp.escape(generated_image)}$/, page.find('img#generatedImage', visible: false)['src']
+      assert_match /#{Regexp.escape(reference_image)}$/, page.find('img#referenceImage', visible: false)['src']
 
       click_link 'Accept'
       sleep 0.1
 
-      assert_file_deleted "#{homemove_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png_difference.gif"
+      assert_file_deleted generated_image
 
-      assert_match %r{artifacts/screenshots_generated_this_run/homemove/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1\.png$},
-        page.find('img#generatedImage', visible: false)['src']
+      generated_image = "#{generated_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png"
+      reference_image = "#{reference_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png"
+
+      assert_match /#{Regexp.escape(generated_image)}$/, page.find('img#generatedImage', visible: false)['src']
+      assert_match /#{Regexp.escape(reference_image)}$/, page.find('img#referenceImage', visible: false)['src']
 
       click_link 'Accept'
       sleep 0.5
 
-      assert File.exists? "artifacts/reference_screenshots/homemove/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png"
-      assert_file_deleted "artifacts/screenshots_generated_this_run/homemove/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png"
+      assert_file_deleted generated_image
 
       assert page.has_selector?('h1', text: 'Done!')
     end
