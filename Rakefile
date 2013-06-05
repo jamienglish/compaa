@@ -3,7 +3,6 @@ require 'bundler'
 require 'rake'
 require 'rake/testtask'
 require 'jasmine'
-require 'jasmine-headless-webkit'
 load 'jasmine/tasks/jasmine.rake'
 
 Bundler::GemHelper.install_tasks
@@ -21,11 +20,6 @@ namespace :spec do
   Rake::TestTask.new :integration do |t|
     t.libs   << 'spec'
     t.pattern = 'spec/integration/*_spec.rb'
-  end
-
-  Jasmine::Headless::Task.new('js') do |t|
-    t.colors = true
-    t.keep_on_error = true
   end
 
   task :js => :start_mock

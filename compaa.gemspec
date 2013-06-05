@@ -23,7 +23,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rack-test'
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'jasmine'
-  gem.add_development_dependency 'jasmine-headless-webkit'
   gem.add_development_dependency 'sinatra'
   gem.add_development_dependency 'rack-cors'
   gem.add_development_dependency 'pry'
@@ -32,6 +31,4 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'haml'
   gem.add_dependency 'rack'
-  gem.add_dependency 'launchy'
-  gem.add_dependency 'coffee-script'
 end
