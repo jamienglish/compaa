@@ -30,58 +30,82 @@ describe "accepting screenshots from the browser" do
     refute FileUtils.compare_file(path1, path2)
   end
 
+  def generated_dir
+    'artifacts/screenshots_generated_this_run/homemove'
+  end
+
+  def reference_dir
+    'artifacts/reference_screenshots/homemove'
+  end
+
+  def assert_generated_becomes_reference(path, &block)
+    generated_image = File.binread(File.join(generated_dir, path))
+    yield
+    reference_image = File.binread(File.join(reference_dir, path))
+
+    assert_equal generated_image, reference_image
+    assert_file_deleted File.join(generated_dir, path)
+  end
+
+  def assert_reference_doesnt_change(path)
+    old = File.binread(File.join(reference_dir, path))
+    yield
+    new = File.binread(File.join(reference_dir, path))
+    generated = File.binread(File.join(generated_dir, path))
+
+    assert_equal old, new
+    refute_equal generated, new
+  end
+
+  def assert_current_screenshots_are_shown(path)
+    generated_image = File.join(generated_dir, path)
+    reference_image = File.join(reference_dir, path)
+
+    assert_match /#{Regexp.escape(generated_image)}$/, page.find('img#generatedImage', visible: false)['src']
+    assert_match /#{Regexp.escape(reference_image)}$/, page.find('img#referenceImage', visible: false)['src']
+  end
+
   it "Accepts via clicking accept" do
     Dir.chdir 'tmp/homemove' do
-      reference_dir = 'artifacts/reference_screenshots/homemove'
-      generated_dir = 'artifacts/screenshots_generated_this_run/homemove'
-
       visit '/'
 
-      sleep 1
+      current_screenshot = 'step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png'
 
-      generated_image = "#{generated_dir}/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png"
-      reference_image = "#{reference_dir}/step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png"
+      assert_match /#{Regexp.escape(File.join(generated_dir, current_screenshot))}$/,
+        page.find('img#generatedImage')['src']
 
-      assert_match /#{Regexp.escape(generated_image)}$/, page.find('img#generatedImage')['src']
+      assert_generated_becomes_reference current_screenshot do
+        click_link 'Accept'
+      end
 
-      click_link 'Accept'
       sleep 0.1
 
-      assert_file_deleted generated_image
+      current_screenshot = 'step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png'
 
-      generated_image = "#{generated_dir}/step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png"
-      reference_image = "#{reference_dir}/step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png"
+      assert_current_screenshots_are_shown current_screenshot
+      assert_reference_doesnt_change current_screenshot do
+        click_link 'Reject'
+      end
 
-      assert_match /#{Regexp.escape(generated_image)}$/, page.find('img#generatedImage', visible: false)['src']
-      assert_match /#{Regexp.escape(reference_image)}$/, page.find('img#referenceImage', visible: false)['src']
-
-      click_link 'Reject'
       sleep 0.1
 
-      refute_file_deleted generated_image
-      refute_same_file reference_image, generated_image
+      current_screenshot = 'step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png'
 
-      generated_image = "#{generated_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png"
-      reference_image = "#{reference_dir}/step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png"
+      assert_current_screenshots_are_shown current_screenshot
+      assert_generated_becomes_reference current_screenshot do
+        click_link 'Accept'
+      end
 
-      assert_match /#{Regexp.escape(generated_image)}$/, page.find('img#generatedImage', visible: false)['src']
-      assert_match /#{Regexp.escape(reference_image)}$/, page.find('img#referenceImage', visible: false)['src']
-
-      click_link 'Accept'
       sleep 0.1
 
-      assert_file_deleted generated_image
+      current_screenshot = 'validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png'
 
-      generated_image = "#{generated_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png"
-      reference_image = "#{reference_dir}/validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png"
+      assert_current_screenshots_are_shown current_screenshot
+      assert_generated_becomes_reference current_screenshot do
+        click_link 'Accept'
+      end
 
-      assert_match /#{Regexp.escape(generated_image)}$/, page.find('img#generatedImage', visible: false)['src']
-      assert_match /#{Regexp.escape(reference_image)}$/, page.find('img#referenceImage', visible: false)['src']
-
-      click_link 'Accept'
-      sleep 0.5
-
-      assert_file_deleted generated_image
+      sleep 0.1
 
       assert page.has_selector?('h1', text: 'Done!')
     end
