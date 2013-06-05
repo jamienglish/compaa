@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'capybara'
 
+FileUtils.mkdir_p('tmp/homemove')
 Dir.chdir 'tmp/homemove' do
   Capybara.app = Compaa::RackApp.new
 end
