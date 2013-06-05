@@ -22,6 +22,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'rack-test'
   gem.add_development_dependency 'capybara'
+  gem.add_development_dependency 'poltergeist'
   gem.add_development_dependency 'jasmine'
   gem.add_development_dependency 'sinatra'
   gem.add_development_dependency 'rack-cors'
