@@ -70,6 +70,8 @@ describe "accepting screenshots from the browser" do
     Dir.chdir 'tmp/homemove' do
       visit '/'
 
+      sleep 2
+
       current_screenshot = 'step_0_moving_home/firefox_Darwin_sky_helpcentre_home_move_getting_started1.png'
 
       assert_match /#{Regexp.escape(File.join(generated_dir, current_screenshot))}$/,
@@ -79,7 +81,7 @@ describe "accepting screenshots from the browser" do
         click_link 'Accept'
       end
 
-      sleep 0.2
+      sleep 2
 
       current_screenshot = 'step_2_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png'
 
@@ -88,7 +90,7 @@ describe "accepting screenshots from the browser" do
         click_link 'Reject'
       end
 
-      sleep 0.2
+      sleep 2
 
       current_screenshot = 'step_4_contact_details/firefox_Darwin_sky_helpcentre_home_move_contact_details1.png'
 
@@ -97,7 +99,7 @@ describe "accepting screenshots from the browser" do
         click_link 'Accept'
       end
 
-      sleep 0.2
+      sleep 2
 
       current_screenshot = 'validation_failures_on_your_new_home/firefox_Darwin_sky_helpcentre_home_move_your_new_home1.png'
 
@@ -106,7 +108,7 @@ describe "accepting screenshots from the browser" do
         click_link 'Accept'
       end
 
-      sleep 0.2
+      sleep 2
 
       assert page.has_selector?('h1', text: 'Done!')
     end
