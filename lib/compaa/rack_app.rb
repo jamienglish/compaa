@@ -39,9 +39,6 @@ module Compaa
         case @request.path
         when '/'                   then index
         when '/artifacts.json'     then artifacts_json
-        when '/compaa.js'          then compaa_js
-        when '/blender.js'         then blender_js
-        when '/context_blender.js' then context_blender_js
         else                            four_oh_four
         end
       end
